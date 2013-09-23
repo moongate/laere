@@ -1,0 +1,69 @@
+module.exports = (grunt) ->
+
+  pkg = grunt.file.readJSON('package.json')
+
+  # Project Configuration
+  grunt.initConfig
+    watch:
+      jade:
+        files: ["app/views/**"]
+        options:
+          livereload: true
+
+      js:
+        files: ["public/js/**", "app/**/*.js"]
+        tasks: ["jshint"]
+        options:
+          livereload: true
+
+      html:
+        files: ["public/views/**"]
+        options:
+          livereload: true
+
+      css:
+        files: ["public/css/**"]
+        options:
+          livereload: true
+
+    jshint:
+      all: ["gruntfile.js", "public/js/**/*.js", "test/**/*.js", "app/**/*.js"]
+
+    nodemon:
+      dev:
+        options:
+          file: "server.js"
+          args: []
+          ignoredFiles: ["README.md", "node_modules/**", ".DS_Store"]
+          watchedExtensions: ["js"]
+          watchedFolders: ["app", "config"]
+          debug: true
+          delayTime: 1
+          env:
+            PORT: 3000
+
+          cwd: __dirname
+
+    concurrent:
+      tasks: ["nodemon", "watch"]
+      options:
+        logConcurrentOutput: true
+
+    mochaTest:
+      options:
+        reporter: "spec"
+
+      src: ["test/**/*.js"]
+
+
+  #Load NPM tasks
+  grunt.loadNpmTasks name for name of pkg.devDependencies when name[0..5] is 'grunt-'
+
+  #Making grunt default to force in order not to break the project.
+  grunt.option "force", true
+
+  #Default task(s).
+  grunt.registerTask "default", ["jshint", "concurrent"]
+
+  #Test task.
+  grunt.registerTask "test", ["mochaTest"]
