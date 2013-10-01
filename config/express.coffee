@@ -34,6 +34,13 @@ module.exports = (app, passport) ->
     
     #cookieParser should be above session
     app.use express.cookieParser()
+
+    #get account by subdomain, if any
+    app.use (req, res, next) ->
+      account = /(.*).laere(dev)?.co/.exec(req.headers.host)?[1]
+      console.log account
+      req.account = account if account
+      next()
     
     #bodyParser should be above methodOverride
     app.use express.bodyParser()
@@ -57,7 +64,7 @@ module.exports = (app, passport) ->
     #use passport session
     app.use passport.initialize()
     app.use passport.session()
-    
+
     #routes should be at the last
     app.use app.router
     
@@ -74,13 +81,8 @@ module.exports = (app, passport) ->
       res.status(500).render "500",
         error: err.stack
 
-
-    
     #Assume 404 since no middleware responded
     app.use (req, res, next) ->
       res.status(404).render "404",
         url: req.originalUrl
         error: "Not found"
-
-
-

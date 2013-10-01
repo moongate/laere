@@ -6,7 +6,7 @@ module.exports = (grunt) ->
   grunt.initConfig
     watch:
       coffee:
-        files: ["public/script/**/*.coffee", "app/**/*.coffee"]
+        files: ["public/script/**/*.coffee", "app/**/*.coffee", "config/**/*.coffee"]
         tasks: ["coffee"]
 
       less:
@@ -55,7 +55,7 @@ module.exports = (grunt) ->
           debug: true
           delayTime: 1
           env:
-            PORT: 3000
+            PORT: 80
 
           cwd: __dirname
 
