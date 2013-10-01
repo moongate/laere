@@ -1,50 +1,60 @@
-/**
- * Module dependencies.
- */
-var express = require('express'),
-    fs = require('fs'),
-    passport = require('passport'),
-    logger = require('mean-logger');
+/*
+Module dependencies.
+*/
 
-/**
- * Main application entry file.
- * Please note that the order of loading is important.
- */
 
-//Load configurations
-//if test env, load example file
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    config = require('./config/config'),
-    auth = require('./config/middlewares/authorization'),
-    mongoose = require('mongoose');
+(function() {
+  var app, auth, config, db, env, exports, express, fs, logger, models_path, mongoose, passport, port;
 
-//Bootstrap db connection
-var db = mongoose.connect(config.db);
+  express = require("express");
 
-//Bootstrap models
-var models_path = __dirname + '/app/models';
-fs.readdirSync(models_path).forEach(function(file) {
-    require(models_path + '/' + file);
-});
+  fs = require("fs");
 
-//bootstrap passport config
-require('./config/passport')(passport);
+  passport = require("passport");
 
-var app = express();
+  logger = require("mean-logger");
 
-//express settings
-require('./config/express')(app, passport);
+  /*
+  Main application entry file.
+  Please note that the order of loading is important.
+  */
 
-//Bootstrap routes
-require('./config/routes')(app, passport, auth);
 
-//Start the app by listening on <port>
-var port = config.port;
-app.listen(port);
-console.log('Express app started on port ' + port);
+  env = process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
-//Initializing logger 
-logger.init(app, passport, mongoose);
+  config = require("./config/config");
 
-//expose app
-exports = module.exports = app;
+  auth = require("./config/middlewares/authorization");
+
+  mongoose = require("mongoose");
+
+  db = mongoose.connect(config.db);
+
+  models_path = __dirname + "/app/models";
+
+  fs.readdirSync(models_path).forEach(function(file) {
+    if (file.indexOf('.coffee') > 0) {
+      return;
+    }
+    return require(models_path + "/" + file);
+  });
+
+  require("./config/passport")(passport);
+
+  app = express();
+
+  require("./config/express")(app, passport);
+
+  require("./config/routes")(app, passport, auth);
+
+  port = config.port;
+
+  app.listen(port);
+
+  console.log("Express app started on port " + port);
+
+  logger.init(app, passport, mongoose);
+
+  exports = module.exports = app;
+
+}).call(this);

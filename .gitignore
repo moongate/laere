@@ -4,3 +4,10 @@
 node_modules/
 public/lib
 .idea/
+app/**/*.js
+config/*.js
+config/**/*.js
+public/script/*.js
+public/script/**/*.js
+public/style/*.css
+server.js

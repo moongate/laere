@@ -5,14 +5,21 @@ module.exports = (grunt) ->
   # Project Configuration
   grunt.initConfig
     watch:
+      coffee:
+        files: ["public/script/**/*.coffee", "app/**/*.coffee"]
+        tasks: ["coffee"]
+
+      less:
+        files: ["public/style/**/*.less"]
+        tasks: ["less"]
+
       jade:
         files: ["app/views/**"]
         options:
           livereload: true
 
       js:
-        files: ["public/js/**", "app/**/*.js"]
-        tasks: ["jshint"]
+        files: ["public/script/**/*.js", "app/**/*.js"]
         options:
           livereload: true
 
@@ -22,12 +29,20 @@ module.exports = (grunt) ->
           livereload: true
 
       css:
-        files: ["public/css/**"]
+        files: ["public/style/**/*.css"]
         options:
           livereload: true
 
-    jshint:
-      all: ["gruntfile.js", "public/js/**/*.js", "test/**/*.js", "app/**/*.js"]
+    coffee:
+      main:
+        expand: true,
+        src: ['**/*.coffee', '!Gruntfile.coffee', '!node_modules/**/*']
+        ext: '.js'
+
+    less:
+      main:
+        files:
+          "public/style/main.css": "public/style/main.less"
 
     nodemon:
       dev:
@@ -55,7 +70,6 @@ module.exports = (grunt) ->
 
       src: ["test/**/*.js"]
 
-
   #Load NPM tasks
   grunt.loadNpmTasks name for name of pkg.devDependencies when name[0..5] is 'grunt-'
 
@@ -63,7 +77,7 @@ module.exports = (grunt) ->
   grunt.option "force", true
 
   #Default task(s).
-  grunt.registerTask "default", ["jshint", "concurrent"]
+  grunt.registerTask "default", ["coffee", "less", "concurrent"]
 
   #Test task.
   grunt.registerTask "test", ["mochaTest"]

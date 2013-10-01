@@ -41,7 +41,8 @@
         "supertest": "latest",
         "should": "latest",
         "grunt-contrib-watch": "latest",
-        "grunt-contrib-jshint": "latest",
+        "grunt-contrib-coffee": "latest",
+        "grunt-contrib-less": "latest",
         "grunt-nodemon": "latest",
         "grunt-concurrent": "latest",
         "grunt-mocha-test": "latest"
