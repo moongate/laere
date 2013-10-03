@@ -76,6 +76,8 @@ module.exports = (grunt) ->
   #Making grunt default to force in order not to break the project.
   grunt.option "force", true
 
+  grunt.registerTask "dist", ["coffe", "less"]
+  	
   #Default task(s).
   grunt.registerTask "default", ["coffee", "less", "concurrent"]
 
