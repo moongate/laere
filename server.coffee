@@ -41,7 +41,7 @@ require("./config/routes") app, passport, auth
 #Start the app by listening on <port>
 port = config.port
 app.listen port
-console.log "Express app started on port " + port
+console.log "Express app started on port #{port} with environment #{env}"
 
 #Initializing logger 
 logger.init app, passport, mongoose
