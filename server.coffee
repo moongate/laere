@@ -24,7 +24,6 @@ db = mongoose.connect(config.db)
 #Bootstrap models
 models_path = __dirname + "/app/models"
 fs.readdirSync(models_path).forEach (file) ->
-  return if file.indexOf('.coffee') > 0
   require models_path + "/" + file
 
 
