@@ -2,7 +2,6 @@
 Module dependencies.
 ###
 mongoose = require("mongoose")
-config = require("../../config/config")
 Schema = mongoose.Schema
 
 ###

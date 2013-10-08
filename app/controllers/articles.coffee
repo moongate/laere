@@ -16,8 +16,6 @@ exports.article = (req, res, next, id) ->
     req.article = article
     next()
 
-
-
 ###
 Create a article
 ###
@@ -33,8 +31,6 @@ exports.create = (req, res) ->
     else
       res.jsonp article
 
-
-
 ###
 Update a article
 ###
@@ -43,8 +39,6 @@ exports.update = (req, res) ->
   article = _.extend(article, req.body)
   article.save (err) ->
     res.jsonp article
-
-
 
 ###
 Delete an article
@@ -59,14 +53,11 @@ exports.destroy = (req, res) ->
     else
       res.jsonp article
 
-
-
 ###
 Show an article
 ###
 exports.show = (req, res) ->
   res.jsonp req.article
-
 
 ###
 List of Articles
@@ -79,4 +70,3 @@ exports.all = (req, res) ->
 
     else
       res.jsonp articles
-

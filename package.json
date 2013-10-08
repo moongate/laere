@@ -13,14 +13,15 @@
         "npm": "1.2.x"
     },
     "scripts": {
-        "start": "forever -w -c coffee server.coffee",
-        "test": "node node_modules/grunt-cli/bin/grunt test",
+        "start": "pm2 dev server.coffee",
+        "stop": "pm2 stop server.coffee",
+        "test": "grunt test",
         "postinstall": "bower install"
     },
     "dependencies": {
         "express": "latest",
-        "jade": "latest",
         "ejs": "latest",
+        "ejs-locals": "latest",
         "mongoose": "latest",
         "connect-mongo": "latest",
         "connect-flash": "latest",
@@ -41,5 +42,9 @@
         "grunt-contrib-coffee": "latest",
         "grunt-contrib-less": "latest",
         "grunt-usemin": "latest"
+    },
+    "peerDependencies": {
+      "grunt-cli": "*",
+      "pm2": "*"
     }
 }

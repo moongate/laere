@@ -5,9 +5,27 @@ FacebookStrategy = require("passport-facebook").Strategy
 GitHubStrategy = require("passport-github").Strategy
 GoogleStrategy = require("passport-google-oauth").Strategy
 User = mongoose.model("User")
-config = require("./config")
-module.exports = (passport) ->
-  
+users = require("../app/controllers/users")
+
+module.exports = (app, passport, config) ->
+  passport.auth =
+    #	Generic require login routing middleware
+    requiresLogin: (req, res, next) ->
+      return res.send(401, "User is not authorized")  unless req.isAuthenticated()
+      next()
+
+    #	User authorizations routing middleware
+    user:
+      hasAuthorization: (req, res, next) ->
+        return res.send(401, "User is not authorized")  unless req.profile.id is req.user.id
+        next()
+
+    #	Article authorizations routing middleware
+    article:
+      hasAuthorization: (req, res, next) ->
+        return res.send(401, "User is not authorized")  unless req.article.user.id is req.user.id
+        next()
+
   #Serialize sessions
   passport.serializeUser (user, done) ->
     done null, user.id
@@ -18,8 +36,10 @@ module.exports = (passport) ->
     , (err, user) ->
       done err, user
 
+  ###
+  Passport Strategies initialization
+  ###
 
-  
   #Use local strategy
   passport.use new LocalStrategy(
     usernameField: "email"
@@ -38,9 +58,8 @@ module.exports = (passport) ->
           message: "Invalid password"
         )
       done null, user
-
   )
-  
+
   #Use twitter strategy
   passport.use new TwitterStrategy(
     consumerKey: config.twitter.clientID
@@ -64,9 +83,8 @@ module.exports = (passport) ->
 
       else
         done err, user
-
   )
-  
+
   #Use facebook strategy
   passport.use new FacebookStrategy(
     clientID: config.facebook.clientID
@@ -91,9 +109,8 @@ module.exports = (passport) ->
 
       else
         done err, user
-
   )
-  
+
   #Use github strategy
   passport.use new GitHubStrategy(
     clientID: config.github.clientID
@@ -117,9 +134,8 @@ module.exports = (passport) ->
 
       else
         done err, user
-
   )
-  
+
   #Use google strategy
   passport.use new GoogleStrategy(
     consumerKey: config.google.clientID
@@ -143,5 +159,43 @@ module.exports = (passport) ->
 
       else
         done err, user
-
   )
+
+  ###
+  Authentication Routes
+  ###
+
+  #Setting the facebook oauth routes
+  app.get "/auth/facebook", passport.authenticate("facebook",
+    scope: ["email", "user_about_me"]
+    failureRedirect: "/signin"
+  ), users.signin
+  app.get "/auth/facebook/callback", passport.authenticate("facebook",
+    failureRedirect: "/signin"
+  ), users.authCallback
+
+  #Setting the github oauth routes
+  app.get "/auth/github", passport.authenticate("github",
+    failureRedirect: "/signin"
+  ), users.signin
+  app.get "/auth/github/callback", passport.authenticate("github",
+    failureRedirect: "/signin"
+  ), users.authCallback
+
+  #Setting the twitter oauth routes
+  app.get "/auth/twitter", passport.authenticate("twitter",
+    failureRedirect: "/signin"
+  ), users.signin
+  app.get "/auth/twitter/callback", passport.authenticate("twitter",
+    failureRedirect: "/signin"
+  ), users.authCallback
+
+  #Setting the google oauth routes
+  app.get "/auth/google", passport.authenticate("google",
+    failureRedirect: "/signin"
+    scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"]
+  ), users.signin
+  app.get "/auth/google/callback", passport.authenticate("google",
+    failureRedirect: "/signin"
+  ), users.authCallback
+

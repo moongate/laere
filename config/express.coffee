@@ -6,85 +6,57 @@ mongoStore = require("connect-mongo")(express)
 flash = require("connect-flash")
 helpers = require("view-helpers")
 harp = require("harp")
-config = require("./config")
-module.exports = (app, passport) ->
-  app.set "showStackError", true
+engine = require('ejs-locals')
 
-  #Should be placed before express.static
-  app.use express.compress(
-    filter: (req, res) ->
-      (/json|text|javascript|css/).test res.getHeader("Content-Type")
-
-    level: 9
-  )
-
-  #Setting the fav icon and static folder
-  app.use express.favicon()
-  app.use express.static(config.root + "/public")
-  app.use harp.pipeline(config.root + "/public")
-
-  #Don't use logger for test env
-  app.use express.logger("dev")  if process.env.NODE_ENV isnt "test"
-
-  #Set views path, template engine and default layout
-  app.set "views", config.root + "/app/views"
-  app.set "view engine", "jade"
-
-  #Enable jsonp
-  app.enable "jsonp callback"
-  app.configure ->
-
-    #cookieParser should be above session
-    app.use express.cookieParser()
-
-    #get account by subdomain, if any
-    app.use (req, res, next) ->
-      account = /(.*).laere(dev)?.co/.exec(req.headers.host)?[1]
-      console.log account
-      req.account = account if account
-      next()
-
-    #bodyParser should be above methodOverride
-    app.use express.bodyParser()
-    app.use express.methodOverride()
-
-    #express/mongo session storage
-    app.use express.session(
-      secret: "MEAN"
-      store: new mongoStore(
-        url: config.db
-        collection: "sessions"
-      )
+module.exports = (app, passport, config) ->
+  # express/mongo session storage
+  session =
+    secret: config.secret
+    store: new mongoStore(
+      url: config.db
+      collection: "sessions"
     )
 
-    #connect flash for flash messages
-    app.use flash()
+  compressOptions =
+    filter: (req, res) ->
+      (/json|text|javascript|css/).test res.getHeader("Content-Type")
+    level: 9
 
-    #dynamic helpers
-    app.use helpers(config.app.name)
+  app.set "showStackError", true
+  app.use express.compress compressOptions # Should be before express.static
+  app.use express.favicon() # Setting the fav icon and static folder
+  app.use express.static(config.root + "/public")
+  app.use harp.pipeline(config.root + "/public")
+  app.use express.logger("dev") if process.env.NODE_ENV isnt "test"
+  app.set "views", config.root + "/app/views" # Set views path
+  app.engine "ejs", engine
+  app.set "view engine", "ejs" # Set template engine
+  app.enable "jsonp callback" # Enable jsonp
+  app.use express.cookieParser() # cookieParser should be above session
+  app.use express.bodyParser() # bodyParser should be above methodOverride
+  app.use express.methodOverride()
+  app.use express.session session
+  app.use flash() # connect flash for flash messages
+  console.log config.app
+  app.use helpers(config.app.name) # dynamic helpers
+  app.use passport.initialize() # use passport session
+  app.use passport.session()
+  app.use app.router # routes should be the last
 
-    #use passport session
-    app.use passport.initialize()
-    app.use passport.session()
+  # Assume "not found" in the error msgs is a 404.
+  # this is somewhat silly, but valid,
+  # you can do whatever you like, set properties, use instanceof etc.
+  app.use (err, req, res, next) ->
+    #Treat as 404
+    return next()  if ~err.message.indexOf("not found")
+    #Log it
+    console.error err.stack
+    #Error page
+    res.status(500).render "500",
+      error: err.stack
 
-    #routes should be at the last
-    app.use app.router
-
-    #Assume "not found" in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
-    app.use (err, req, res, next) ->
-
-      #Treat as 404
-      return next()  if ~err.message.indexOf("not found")
-
-      #Log it
-      console.error err.stack
-
-      #Error page
-      res.status(500).render "500",
-        error: err.stack
-
-    #Assume 404 since no middleware responded
-    app.use (req, res, next) ->
-      res.status(404).render "404",
-        url: req.originalUrl
-        error: "Not found"
+  #Assume 404 since no middleware responded
+  app.use (req, res) ->
+    res.status(404).render "404",
+      url: req.originalUrl
+      error: "Not found"
