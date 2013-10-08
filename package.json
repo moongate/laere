@@ -13,7 +13,7 @@
         "npm": "1.2.x"
     },
     "scripts": {
-        "start": "pm2 dev server.coffee",
+        "start": "pm2 start server.coffee",
         "stop": "pm2 stop server.coffee",
         "test": "grunt test",
         "postinstall": "bower install"

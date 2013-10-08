@@ -45,13 +45,16 @@ Create user
 exports.create = (req, res) ->
   user = new User(req.body)
   user.provider = "local"
+  console.log user
   user.save (err) ->
     if err
+      console.log err
       return res.render("users/signup",
         errors: err.errors
         user: user
       )
     req.logIn user, (err) ->
+      console.log err
       return next(err)  if err
       res.redirect "/"
 

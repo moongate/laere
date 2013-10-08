@@ -37,10 +37,10 @@ module.exports = (app, passport, config) ->
   app.use express.methodOverride()
   app.use express.session session
   app.use flash() # connect flash for flash messages
-  console.log config.app
   app.use helpers(config.app.name) # dynamic helpers
-  app.use passport.initialize() # use passport session
-  app.use passport.session()
+  app.use passport.initialize()
+  app.use passport.session() # use passport session
+  passport.setupRoutes()
   app.use app.router # routes should be the last
 
   # Assume "not found" in the error msgs is a 404.
