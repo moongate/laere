@@ -4,7 +4,16 @@ angular.module("laere").controller "HeaderController", ["$scope", "Global", ($sc
     title: "Articles"
     link: "articles"
   ,
-    title: "Create New Article"
-    link: "articles/create"
+    title: "Accounts"
+    link: "accounts"
+  ,
+    title: "Users"
+    link: "users"
+  ,
+    title: "Courses"
+    link: "courses"
+  ,
+    title: "Classrooms"
+    link: "classrooms"
   ]
 ]
