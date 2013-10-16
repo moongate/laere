@@ -5,7 +5,7 @@ FacebookStrategy = require("passport-facebook").Strategy
 GitHubStrategy = require("passport-github").Strategy
 GoogleStrategy = require("passport-google-oauth").Strategy
 User = mongoose.model("User")
-users = require("../app/controllers/users")
+users = require("../app/user/user-controller")
 
 module.exports = (app, passport, config) ->
   passport.auth =

@@ -1,3 +1,5 @@
 # Laere
 
-The easiest way to organize your courses and teach them online to your students.
+### The online classroom engine
+
+The best way to organize and teach your online classrooms.

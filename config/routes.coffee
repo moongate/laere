@@ -1,8 +1,8 @@
 async = require("async")
 module.exports = (app, passport) ->
 
-  users = require("../app/controllers/users")
-  articles = require("../app/controllers/articles")
+  users = require("../app/user/user-controller")
+  articles = require("../app/article/article-controller")
   index = require("../app/controllers/index")
 
   # User Routes
