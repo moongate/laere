@@ -14,6 +14,7 @@ UserSchema = new Schema(
   name: String
   email: String
   username: String
+  accountName: String
   provider: String
   hashed_password: String
   salt: String
@@ -43,25 +44,25 @@ validatePresenceOf = (value) ->
 
 # the below 4 validations only apply if you are signing up traditionally
 UserSchema.path("name").validate ((name) ->
-  
+
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
   name.length
 ), "Name cannot be blank"
 UserSchema.path("email").validate ((email) ->
-  
+
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
   email.length
 ), "Email cannot be blank"
 UserSchema.path("username").validate ((username) ->
-  
+
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
   username.length
 ), "Username cannot be blank"
 UserSchema.path("hashed_password").validate ((hashed_password) ->
-  
+
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
   hashed_password.length
@@ -82,10 +83,10 @@ UserSchema.pre "save", (next) ->
 Methods
 ###
 UserSchema.methods =
-  
+
   ###
   Authenticate - check if the passwords are the same
-  
+
   @param {String} plainText
   @return {Boolean}
   @api public
@@ -93,20 +94,20 @@ UserSchema.methods =
   authenticate: (plainText) ->
     @encryptPassword(plainText) is @hashed_password
 
-  
+
   ###
   Make salt
-  
+
   @return {String}
   @api public
   ###
   makeSalt: ->
     Math.round((new Date().valueOf() * Math.random())) + ""
 
-  
+
   ###
   Encrypt password
-  
+
   @param {String} password
   @return {String}
   @api public
