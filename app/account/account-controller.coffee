@@ -24,7 +24,7 @@ exports.create = (req, res) ->
   account.creator = req.user
   account.save (err) ->
     if err
-      res.send "users/signup",
+      res.send "accounts/create",
         errors: err.errors
         account: account
 

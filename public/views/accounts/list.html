@@ -1,0 +1,11 @@
+<section data-ng-controller="AccountsController">
+	<ul class="accounts unstyled">
+		<li data-ng-repeat="account in accounts">
+			<span>{{account.created | date:'medium'}}</span> /
+			<span>{{account.creator.name}}</span>
+			<h2><a data-ng-href="#/accounts/{{account._id}}">{{account.name}}</a></h2>
+			<div>{{account.label}}</div>
+		</li>
+	</ul>
+	<a href="/#/accounts/create">Create account</a>
+</section>

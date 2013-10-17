@@ -1,0 +1,6 @@
+<section data-ng-controller="AccountsController" data-ng-init="findOne()">
+	<span>{{account.created | date:'medium'}}</span> /
+	<span>{{account.creator.name}}</span>
+	<h2>{{account.name}} <a data-ng-show="global.user._id == account.creator._id" href="/#/accounts/{{account._id}}/edit">edit</a></h2>
+	<div>{{account.label}}</div>
+</section>

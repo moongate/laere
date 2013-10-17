@@ -1,0 +1,21 @@
+<section data-ng-controller="AccountsController">
+    <form class="form-horizontal" data-ng-submit="createOrUpdate()">
+        <div class="control-group">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+                <input type="text" data-ng-model="account.name" id="name" placeholder="Name" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="label">Label</label>
+            <div class="controls">
+                <input type="text" data-ng-model="account.label" id="label" placeholder="Label" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" class="btn">
+            </div>
+        </div>
+    </form>
+</section>
