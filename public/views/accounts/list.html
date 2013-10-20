@@ -5,6 +5,7 @@
 			<span>{{account.creator.name}}</span>
 			<h2><a data-ng-href="#/accounts/{{account._id}}">{{account.name}}</a></h2>
 			<div>{{account.label}}</div>
+            <button class="btn" ng-click="remove(account)" ng-show="account._id">Remove</button>
 		</li>
 	</ul>
 	<a href="/#/accounts/create">Create account</a>
