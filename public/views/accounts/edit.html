@@ -1,22 +1,20 @@
-<section data-ng-controller="AccountsController">
-    <form class="form-horizontal" data-ng-submit="createOrUpdate()">
-        <div class="control-group">
-            <label class="control-label" for="name">Name</label>
-            <div class="controls">
-                <input type="text" data-ng-model="account.name" id="name" placeholder="Name" class="input-small" required>
-                <span>.laere.co</span>
+<section class="col-md-6 col-md-offset-3" data-ng-controller="AccountsController">
+    <h2>Create an account</h2>
+    <form class="form" data-ng-submit="createOrUpdate()">
+        <div class="form-group">
+            <label class="control-label" for="name">URL</label>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon">http://</span>
+                <input type="text" data-ng-model="account.name" id="name" placeholder="my-account" class="form-control input-lg" required autofocus>
+                <span class="input-group-addon">.laere.co</span>
             </div>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="label">Label</label>
-            <div class="controls">
-                <input type="text" data-ng-model="account.label" id="label" placeholder="Label" required>
-            </div>
+        <div class="form-group">
+            <label class="control-label" for="label">Title</label>
+            <input type="text" data-ng-model="account.label" id="label" placeholder="My account" required class="form-control input-lg">
         </div>
-        <div class="control-group">
-            <div class="controls">
-                <input type="submit" class="btn">
-            </div>
+
+        <input type="submit" class="btn btn-success btn-lg pull-right" value="Create account">
         </div>
     </form>
 </section>
