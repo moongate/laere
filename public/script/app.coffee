@@ -1,8 +1,8 @@
 window.app = angular.module("laere", ["ngCookies", "ngResource",
                                       "ui.bootstrap", "ui.route",
-                                      "laere.articles", "laere.accounts", "laere.users", "laere.courses"])
+                                      "laere.articles", "laere.schools", "laere.users", "laere.courses"])
 angular.module "laere.articles", []
-angular.module "laere.accounts", []
+angular.module "laere.schools", []
 angular.module "laere.users", []
 angular.module "laere.courses", []
 
@@ -10,7 +10,7 @@ window.app.factory "Global", [=>
   @_data =
     user: window.user
     authenticated: !!window.user
-    account: window.account
+    school: window.school
 
   @_data
 ]
@@ -26,14 +26,14 @@ window.app.config ["$routeProvider", ($routeProvider) ->
     templateUrl: "views/articles/edit.html"
   .when "/articles/:articleId",
     templateUrl: "views/articles/view.html"
-  .when "/accounts",
-    templateUrl: "views/accounts/list.html"
-  .when "/accounts/create",
-    templateUrl: "views/accounts/edit.html"
-  .when "/accounts/:accountId/edit",
-    templateUrl: "views/accounts/edit.html"
-  .when "/accounts/:accountId",
-    templateUrl: "views/accounts/view.html"
+  .when "/schools",
+    templateUrl: "views/schools/list.html"
+  .when "/schools/create",
+    templateUrl: "views/schools/edit.html"
+  .when "/schools/:schoolId/edit",
+    templateUrl: "views/schools/edit.html"
+  .when "/schools/:schoolId",
+    templateUrl: "views/schools/view.html"
   .when "/users",
     templateUrl: "views/users/list.html"
   .when "/users/create",
@@ -48,7 +48,7 @@ window.app.config ["$routeProvider", ($routeProvider) ->
 ]
 
 app.run ($rootScope) ->
-  $rootScope.account = window.account
+  $rootScope.school = window.school
 
 angular.element(document).ready ->
   window.location.hash = ""  if window.location.hash is "#_=_" # Fixing facebook bug with redirect

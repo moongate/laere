@@ -3,7 +3,7 @@ module.exports = (app, passport) ->
 
   users = require("../app/user/user-controller")
   articles = require("../app/article/article-controller")
-  accounts = require("../app/account/account-controller")
+  schools = require("../app/school/school-controller")
   index = require("../app/controllers/index")
 
   # User Routes
@@ -32,13 +32,13 @@ module.exports = (app, passport) ->
   app.del "/articles/:articleId", passport.auth.requiresLogin, passport.auth.article.hasAuthorization, articles.destroy
   app.param "articleId", articles.article
 
-  # Account Routes
-  app.get "/accounts", accounts.all
-  app.post "/accounts", passport.auth.requiresLogin, accounts.create
-  app.get "/accounts/:accountId", accounts.show
-  app.put "/accounts/:accountId", passport.auth.requiresLogin, passport.auth.account.hasAuthorization, accounts.update
-  app.del "/accounts/:accountId", passport.auth.requiresLogin, passport.auth.account.hasAuthorization, accounts.destroy
-  app.param "accountId", accounts.account
+  # School Routes
+  app.get "/schools", schools.all
+  app.post "/schools", passport.auth.requiresLogin, schools.create
+  app.get "/schools/:schoolId", schools.show
+  app.put "/schools/:schoolId", passport.auth.requiresLogin, passport.auth.school.hasAuthorization, schools.update
+  app.del "/schools/:schoolId", passport.auth.requiresLogin, passport.auth.school.hasAuthorization, schools.destroy
+  app.param "schoolId", schools.school
 
   # Home route
   app.get "/", index.render

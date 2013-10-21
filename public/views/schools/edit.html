@@ -1,6 +1,7 @@
-<section class="col-md-6 col-md-offset-3" data-ng-controller="AccountsController">
+<section class="col-md-6 col-md-offset-3" data-ng-controller="SchoolsController">
     <div class="page-header">
-        <h2>Create your co0l school</h2>
+        <h2 data-ng-hide="school._id">Create your school</h2>
+        <h2 data-ng-show="school._id">Edit your school</h2>
     </div>
 
     <form class="form" data-ng-submit="createOrUpdate()">
@@ -8,14 +9,14 @@
             <label class="control-label" for="name">URL</label>
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">http://</span>
-                <input type="text" data-ng-model="account.name" id="name" placeholder="my-account" class="form-control input-lg" required autofocus>
+                <input type="text" data-ng-model="school.name" id="name" placeholder="my-school" class="form-control input-lg" required autofocus>
                 <span class="input-group-addon">.laere.co</span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label" for="label">Title</label>
-            <input type="text" data-ng-model="account.label" id="label" placeholder="My account" required class="form-control input-lg">
+            <input type="text" data-ng-model="school.label" id="label" placeholder="My school" required class="form-control input-lg">
         </div>
 
         <button type="submit" class="btn btn-success btn-lg pull-right">Create school  <span class="glyphicon glyphicon-ok-sign"></span></button>

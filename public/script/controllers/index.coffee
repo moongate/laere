@@ -1,3 +1,3 @@
-angular.module("laere").controller "IndexController", ($scope, Global, Accounts) ->
+angular.module("laere").controller "IndexController", ($scope, Global, Schools) ->
   $scope.global = Global
-  $scope.accounts = Accounts.query()
+  $scope.schools = Schools.query()

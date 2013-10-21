@@ -72,7 +72,7 @@ exports.update = (req, res) ->
       res.jsonp user
 
 ###
-Delete an account
+Delete an school
 ###
 exports.destroy = (req, res) ->
   user = req.profile

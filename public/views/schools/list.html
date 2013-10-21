@@ -1,0 +1,16 @@
+<section class="col-md-6 col-md-offset-3" data-ng-controller="SchoolsController">
+    <div class="page-header clearfix">
+        <h2 class="pull-left">Schools</h2>
+		<a href="/#/schools/create" class="btn btn-success pull-right">Create new school</a>
+    </div>
+
+	<ul class="schools unstyled">
+		<li data-ng-repeat="school in schools">
+			<span>{{school.created | date:'medium'}}</span> /
+			<span>{{school.creator.name}}</span>
+			<h2><a data-ng-href="#/schools/{{school._id}}">{{school.name}}</a></h2>
+			<div>{{school.label}}</div>
+            <button class="btn" ng-click="remove(school)" ng-show="school._id">Remove</button>
+		</li>
+	</ul>
+</section>

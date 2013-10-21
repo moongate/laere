@@ -26,10 +26,10 @@ module.exports = (app, passport, config) ->
         return res.send(401, "User is not authorized")  unless req.article.user.id is req.user.id
         next()
 
-    #	Account authorizations routing middleware
-    account:
+    #	School authorizations routing middleware
+    school:
       hasAuthorization: (req, res, next) ->
-        return res.send(401, "User is not authorized")  unless req.account.creator.id is req.user.id
+        return res.send(401, "User is not authorized")  unless req.school.creator.id is req.user.id
         next()
 
   #Serialize sessions

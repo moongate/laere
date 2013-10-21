@@ -12,7 +12,7 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
       name: $scope.user.name
       email: $scope.user.email
       username: $scope.user.username
-      accountName: $scope.user.accountName
+      schoolName: $scope.user.schoolName
     )
     user.$save (response) ->
       $location.path "users/" + response._id
@@ -20,7 +20,7 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
     @name = ""
     @email = ""
     @username = ""
-    @accountName = ""
+    @schoolName = ""
 
   $scope.remove = (user) ->
     user.$remove()

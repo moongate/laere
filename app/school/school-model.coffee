@@ -5,9 +5,9 @@ mongoose = require("mongoose")
 Schema = mongoose.Schema
 
 ###
-Account Schema
+School Schema
 ###
-AccountSchema = new Schema(
+SchoolSchema = new Schema(
   created:
     type: Date
     'default': Date.now
@@ -30,18 +30,18 @@ AccountSchema = new Schema(
 ###
 Validations
 ###
-AccountSchema.path("name").validate ((name) ->
+SchoolSchema.path("name").validate ((name) ->
   name.length
 ), "Name cannot be blank"
 
-AccountSchema.path("label").validate ((label) ->
+SchoolSchema.path("label").validate ((label) ->
   label.length
 ), "Label cannot be blank"
 
 ###
 Statics
 ###
-AccountSchema.statics = load: (id, cb) ->
+SchoolSchema.statics = load: (id, cb) ->
   @findOne(_id: id).populate("creator").exec cb
 
-mongoose.model "Account", AccountSchema
+mongoose.model "School", SchoolSchema

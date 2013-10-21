@@ -14,7 +14,7 @@ UserSchema = new Schema(
   name: String
   email: String
   username: String
-  accountName: String
+  schoolName: String
   provider: String
   hashed_password: String
   salt: String

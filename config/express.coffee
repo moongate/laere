@@ -7,7 +7,7 @@ flash = require("connect-flash")
 helpers = require("view-helpers")
 harp = require("harp")
 engine = require('ejs-locals')
-accounts = require("../app/account/account-controller")
+schools = require("../app/school/school-controller")
 
 module.exports = (app, passport, config) ->
   # express/mongo session storage
@@ -26,7 +26,6 @@ module.exports = (app, passport, config) ->
   app.set "showStackError", true
   app.use express.compress compressOptions # Should be before express.static
   app.use express.favicon() # Setting the fav icon and static folder
-  app.use accounts.verify
   app.use express.static(config.root + "/public")
   app.use harp.pipeline(config.root + "/public")
   app.use express.logger("dev") if process.env.NODE_ENV isnt "test"
@@ -43,6 +42,7 @@ module.exports = (app, passport, config) ->
   app.use passport.initialize()
   app.use passport.session() # use passport session
   passport.setupRoutes()
+  app.use schools.verify
   app.use app.router # routes should be the last
 
   # Assume "not found" in the error msgs is a 404.
