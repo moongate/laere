@@ -1,0 +1,10 @@
+<section data-ng-controller="UsersController">
+	<ul class="users unstyled">
+		<li data-ng-repeat="user in users">
+			<h2><a data-ng-href="#/users/{{user._id}}">{{user.username}}</a></h2>
+			<div>{{user.email}}</div>
+            <button class="btn" ng-click="remove(user)" ng-show="user._id">Remove</button>
+		</li>
+	</ul>
+	<a href="/#/users/create">Create user</a>
+</section>

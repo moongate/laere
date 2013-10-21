@@ -1,4 +1,4 @@
-angular.module("laere.accounts").controller "AccountsController", ["$scope", "$routeParams", "$location", "Global", "Accounts", ($scope, $routeParams, $location, Global, Accounts) ->
+angular.module("laere.accounts").controller "AccountsController", ($scope, $routeParams, $location, Global, Accounts) ->
   $scope.global = Global
 
   $scope.createOrUpdate = ->
@@ -44,5 +44,3 @@ angular.module("laere.accounts").controller "AccountsController", ["$scope", "$r
     $scope.findOne()
   else
     $scope.find()
-
-]

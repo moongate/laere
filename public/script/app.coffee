@@ -1,6 +1,10 @@
-window.app = angular.module("laere", ["ngCookies", "ngResource", "ui.bootstrap", "ui.route", "laere.articles", "laere.accounts"])
+window.app = angular.module("laere", ["ngCookies", "ngResource",
+                                      "ui.bootstrap", "ui.route",
+                                      "laere.articles", "laere.accounts", "laere.users", "laere.courses"])
 angular.module "laere.articles", []
 angular.module "laere.accounts", []
+angular.module "laere.users", []
+angular.module "laere.courses", []
 
 window.app.factory "Global", [=>
   @_data =
@@ -29,6 +33,14 @@ window.app.config ["$routeProvider", ($routeProvider) ->
     templateUrl: "views/accounts/edit.html"
   .when "/accounts/:accountId",
     templateUrl: "views/accounts/view.html"
+  .when "/users",
+    templateUrl: "views/users/list.html"
+  .when "/users/create",
+    templateUrl: "views/users/edit.html"
+  .when "/users/:userId/edit",
+    templateUrl: "views/users/edit.html"
+  .when "/users/:userId",
+    templateUrl: "views/users/view.html"
   .when "/",
     templateUrl: "views/index.html"
   .otherwise redirectTo: "/"

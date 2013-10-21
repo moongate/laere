@@ -1,0 +1,39 @@
+<section data-ng-controller="UsersController">
+    <form class="form-horizontal" data-ng-submit="createOrUpdate()">
+        <div class="control-group">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+                <input type="text" data-ng-model="user.name" id="name" placeholder="Name" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="username">Username</label>
+            <div class="controls">
+                <input type="text" data-ng-model="user.username" id="username" placeholder="Username" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="email">Email</label>
+            <div class="controls">
+                <input type="text" data-ng-model="user.email" id="email" placeholder="Email" required>
+            </div>
+        </div>
+        <div class="control-group" ng-hide="user._id">
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input type="text" data-ng-model="user.password" id="password" placeholder="Password" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="accountName">Account</label>
+            <div class="controls">
+                <input type="text" data-ng-model="user.accountName" id="accountName" placeholder="Account" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" class="btn">
+            </div>
+        </div>
+    </form>
+</section>
