@@ -10,6 +10,7 @@ window.app.factory "Global", [=>
   @_data =
     user: window.user
     authenticated: !!window.user
+    account: window.account
 
   @_data
 ]

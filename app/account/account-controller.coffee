@@ -70,3 +70,12 @@ exports.all = (req, res) ->
 
     else
       res.jsonp accounts
+
+###
+Account verification interceptor
+###
+exports.verify = (req, res, next) ->
+  account = /(.*).laere(dev)?.co/.exec(req.headers.host)?[1]
+  console.log account
+  req.currentAccount = account if account
+  next()
