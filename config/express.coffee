@@ -33,6 +33,7 @@ module.exports = (app, passport, config) ->
   app.engine "ejs", engine
   app.set "view engine", "ejs" # Set template engine
   app.enable "jsonp callback" # Enable jsonp
+  app.use schools.verify
   app.use express.cookieParser() # cookieParser should be above session
   app.use express.bodyParser() # bodyParser should be above methodOverride
   app.use express.methodOverride()
@@ -42,7 +43,6 @@ module.exports = (app, passport, config) ->
   app.use passport.initialize()
   app.use passport.session() # use passport session
   passport.setupRoutes()
-  app.use schools.verify
   app.use app.router # routes should be the last
 
   # Assume "not found" in the error msgs is a 404.

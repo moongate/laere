@@ -10,6 +10,8 @@ window.app.factory "Global", [=>
     user: window.user
     authenticated: !!window.user
     school: window.school
+    env: window.env
+    host: window.laereHost
 
   @_data
 ]
