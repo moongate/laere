@@ -1,0 +1,4 @@
+<section data-ng-controller="CoursesController">
+	<h2>{{course.name}} <a data-ng-show="global.user._id == course.creator._id" href="/#/courses/{{course._id}}/edit">edit</a></h2>
+	<div>{{course.code}}</div>
+</section>

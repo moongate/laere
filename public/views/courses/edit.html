@@ -1,0 +1,20 @@
+<section class="col-md-6 col-md-offset-3" data-ng-controller="CoursesController">
+    <div class="page-header">
+        <h2 data-ng-hide="course._id">Create your course</h2>
+        <h2 data-ng-show="course._id">Edit your course</h2>
+    </div>
+
+    <form class="form" data-ng-submit="createOrUpdate()">
+        <div class="form-group">
+            <label class="control-label" for="name">Name</label>
+            <input type="text" data-ng-model="course.name" id="name" placeholder="My course" required class="form-control input-lg">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="code">Code</label>
+            <input type="text" data-ng-model="course.code" id="code" placeholder="Course code" required class="form-control input-lg">
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg pull-right">Create course  <span class="glyphicon glyphicon-ok-sign"></span></button>
+    </form>
+</section>
