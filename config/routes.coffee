@@ -18,7 +18,10 @@ module.exports = (app, passport) ->
     failureFlash: "Invalid email or password."
   ), users.session
   app.get "/users/me", users.me
+  app.get "/users", users.all
   app.get "/users/:userId", users.show
+  app.put "/users/:userId", passport.auth.requiresLogin, passport.auth.user.hasAuthorization, users.update
+  app.del "/users/:userId", passport.auth.requiresLogin, passport.auth.user.hasAuthorization, users.destroy
   app.param "userId", users.user
 
   # Article Routes

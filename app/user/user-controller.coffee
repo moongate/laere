@@ -59,20 +59,41 @@ exports.create = (req, res) ->
       res.redirect "/"
 
 ###
+Update a user
+###
+exports.update = (req, res) ->
+  user = req.profile
+  user = _.extend(user, req.body)
+  user.save (err) ->
+    if err
+      res.render "error",
+        status: 500
+    else
+      res.jsonp user
+
+###
+Delete an account
+###
+exports.destroy = (req, res) ->
+  user = req.profile
+  user.remove (err) ->
+    if err
+      res.render "error",
+        status: 500
+    else
+      res.jsonp user
+
+###
 Show profile
 ###
 exports.show = (req, res) ->
-  user = req.profile
-  res.render "users/show",
-    title: user.name
-    user: user
+  res.jsonp req.profile
 
 ###
 Send User
 ###
 exports.me = (req, res) ->
   res.jsonp req.user or null
-
 
 ###
 Find user by id
@@ -83,3 +104,14 @@ exports.user = (req, res, next, id) ->
     return next(new Error("Failed to load User " + id))  unless user
     req.profile = user
     next()
+
+###
+List of Users
+###
+exports.all = (req, res) ->
+  User.find().sort("-username").exec (err, users) ->
+    if err
+      res.render "error",
+        status: 500
+    else
+      res.jsonp users
