@@ -1,7 +1,6 @@
 window.app = angular.module("laere", ["ngCookies", "ngResource",
                                       "ui.bootstrap", "ui.route",
-                                      "laere.articles", "laere.schools", "laere.users", "laere.courses"])
-angular.module "laere.articles", []
+                                      "laere.schools", "laere.users", "laere.courses"])
 angular.module "laere.schools", []
 angular.module "laere.users", []
 angular.module "laere.courses", []
@@ -18,14 +17,6 @@ window.app.factory "Global", [=>
 #Setting up route
 window.app.config ["$routeProvider", ($routeProvider) ->
   $routeProvider
-  .when "/articles",
-    templateUrl: "views/articles/list.html"
-  .when "/articles/create",
-    templateUrl: "views/articles/create.html"
-  .when "/articles/:articleId/edit",
-    templateUrl: "views/articles/edit.html"
-  .when "/articles/:articleId",
-    templateUrl: "views/articles/view.html"
   .when "/schools",
     templateUrl: "views/schools/list.html"
   .when "/schools/create",
@@ -42,6 +33,14 @@ window.app.config ["$routeProvider", ($routeProvider) ->
     templateUrl: "views/users/edit.html"
   .when "/users/:userId",
     templateUrl: "views/users/view.html"
+  .when "/courses",
+    templateUrl: "views/courses/list.html"
+  .when "/courses/create",
+    templateUrl: "views/courses/edit.html"
+  .when "/courses/:courseId/edit",
+    templateUrl: "views/courses/edit.html"
+  .when "/courses/:courseId",
+    templateUrl: "views/courses/view.html"
   .when "/",
     templateUrl: "views/index.html"
   .otherwise redirectTo: "/"

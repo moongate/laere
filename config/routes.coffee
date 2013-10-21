@@ -2,7 +2,6 @@ async = require("async")
 module.exports = (app, passport) ->
 
   users = require("../app/user/user-controller")
-  articles = require("../app/article/article-controller")
   schools = require("../app/school/school-controller")
   index = require("../app/controllers/index")
 
@@ -23,14 +22,6 @@ module.exports = (app, passport) ->
   app.put "/users/:userId", passport.auth.requiresLogin, passport.auth.user.hasAuthorization, users.update
   app.del "/users/:userId", passport.auth.requiresLogin, passport.auth.user.hasAuthorization, users.destroy
   app.param "userId", users.user
-
-  # Article Routes
-  app.get "/articles", articles.all
-  app.post "/articles", passport.auth.requiresLogin, articles.create
-  app.get "/articles/:articleId", articles.show
-  app.put "/articles/:articleId", passport.auth.requiresLogin, passport.auth.article.hasAuthorization, articles.update
-  app.del "/articles/:articleId", passport.auth.requiresLogin, passport.auth.article.hasAuthorization, articles.destroy
-  app.param "articleId", articles.article
 
   # School Routes
   app.get "/schools", schools.all

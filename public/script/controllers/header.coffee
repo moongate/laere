@@ -1,9 +1,6 @@
 angular.module("laere").controller "HeaderController", ["$scope", "Global", ($scope, Global) ->
   $scope.global = Global
   $scope.menu = [
-    title: "Articles"
-    link: "articles"
-  ,
     title: "Schools"
     link: "schools"
   ,
