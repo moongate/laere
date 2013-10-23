@@ -8,7 +8,7 @@
 	<div class="col-md-6" data-ng-repeat="course in courses">
 		<div class="panel panel-default">
 		  <div class="panel-heading clearfix">
-		    <h3 class="panel-title pull-left">{{course.name}} <small>{{course.code}}</small></h3> <i class="glyphicon glyphicon-trash pull-right" ng-click="remove(course)" ng-show="course._id"></i>
+		    <h3 class="panel-title pull-left"><a data-ng-href="#/courses/{{course._id}}">{{course.name}} <small>{{course.code}}</small></a></h3> <i class="glyphicon glyphicon-trash pull-right" ng-click="remove(course)" ng-show="course._id"></i>
 		  </div>
 		  <div class="panel-body">
 		    Panel content
