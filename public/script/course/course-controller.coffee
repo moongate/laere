@@ -1,5 +1,6 @@
 angular.module("laere.courses").controller "CoursesController", ($scope, $routeParams, $location, Global, Courses) ->
   $scope.global = Global
+  $scope.edit = {}
 
   $scope.createOrUpdate = ->
     if $scope.course._id
@@ -39,6 +40,20 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
       courseId: $routeParams.courseId
     , (course) ->
       $scope.course = course
+
+  $scope.editContent = (content) ->
+    $scope.edit.content = angular.copy(content)
+
+  $scope.createOrUpdateContent = ->
+    if $scope.edit.content.index
+      $scope.contents[$scope.edit.content.index] = angular.copy($scope.edit.content)
+    else
+      length = $scope.course.contents.length
+      $scope.edit.content.index = length
+      $scope.edit.content.creator = Global.user
+      $scope.course.contents.push angular.copy($scope.edit.content)
+    $scope.edit.content = undefined
+    return false
 
   if $routeParams.courseId
     $scope.findOne()

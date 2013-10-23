@@ -16,7 +16,19 @@ ContentSchema = new Schema(
     type: Schema.ObjectId
     ref: "User"
 
+  tags: [String]
+
+  type:
+    type: String
+    'default': ""
+    trim: true
+
   name:
+    type: String
+    'default': ""
+    trim: true
+
+  description:
     type: String
     'default': ""
     trim: true
@@ -55,9 +67,8 @@ ClassroomSchema = new Schema(
     type: [Schema.ObjectId]
     ref: "User"
 
-  contentTrack:
-    type: [Schema.ObjectId]
-    ref: "Content"
+  # An array of object Ids of Contents from parent course
+  track: [String]
 )
 
 ###
@@ -96,9 +107,8 @@ CourseSchema = new Schema(
 
   classrooms: [ClassroomSchema]
 
-  contentTrack:
-    type: [Schema.ObjectId]
-    ref: "Content"
+  # An array of object Ids of Contents
+  suggestedTrack: [String]
 )
 
 ###
@@ -119,5 +129,3 @@ CourseSchema.statics = load: (id, cb) ->
   @findOne(_id: id).populate("creator").exec cb
 
 mongoose.model "Course", CourseSchema
-mongoose.model "Classroom", ClassroomSchema
-mongoose.model "Content", ContentSchema

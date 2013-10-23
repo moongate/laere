@@ -4,7 +4,7 @@
         <h2 data-ng-show="course._id">Edit your course</h2>
     </div>
 
-    <form class="form" data-ng-submit="createOrUpdate()">
+    <form class="form clearfix" data-ng-submit="createOrUpdate()">
         <div class="form-group">
             <label class="control-label" for="name">Name</label>
             <input type="text" data-ng-model="course.name" id="name" placeholder="My course" required class="form-control input-lg">
@@ -17,4 +17,6 @@
 
         <button type="submit" class="btn btn-success btn-lg pull-right">Create course  <span class="glyphicon glyphicon-ok-sign"></span></button>
     </form>
+
+    <div ng-include="'views/content/list.html'" class="row"></div>
 </section>
