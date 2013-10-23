@@ -3,10 +3,10 @@
     <h2 class="">Contents</h2>
 
 	<ul class="contents unstyled">
-		<li data-ng-repeat="content in course.contents">
+		<li data-ng-repeat="content in course.contents" data-ng-hide="edit.content.index == $index">
 			<h2>{{content.name}}</h2>
 			<div>{{content.code}}</div>
-            <button class="btn" ng-click="editContent(content)">Edit</button>
+            <button class="btn" ng-click="editContent($index)">Edit</button>
             <button class="btn" ng-click="course.contents.splice($index, 1)">Remove</button>
 		</li>
 	</ul>

@@ -41,16 +41,15 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     , (course) ->
       $scope.course = course
 
-  $scope.editContent = (content) ->
-    $scope.edit.content = angular.copy(content)
+  $scope.editContent = (index) ->
+    $scope.edit.content = angular.copy($scope.course.contents[index])
+    $scope.edit.content.index = index
 
   $scope.createOrUpdateContent = ->
-    if $scope.edit.content.index
-      $scope.contents[$scope.edit.content.index] = angular.copy($scope.edit.content)
+    if $scope.edit.content.index?
+      $scope.course.contents[$scope.edit.content.index] = angular.copy($scope.edit.content)
     else
-      length = $scope.course.contents.length
-      $scope.edit.content.index = length
-      $scope.edit.content.creator = Global.user
+      $scope.edit.content.creator = Global.user._id
       $scope.course.contents.push angular.copy($scope.edit.content)
     $scope.edit.content = undefined
     return false
