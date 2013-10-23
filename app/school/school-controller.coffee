@@ -76,6 +76,15 @@ School verification interceptor
 ###
 exports.verify = (req, res, next) ->
   school = /(.*).laere(dev)?.co/.exec(req.headers.host)?[1]
-  console.log school
-  req.currentSchool = school if school
-  next()
+  return next() unless school?
+  console.log 'searching for', school
+  School.findOne {name: school}, (err, school) ->
+    if err
+      next(new Error("Error while trying to find school"))
+    else if school
+      console.log 'found', school
+      req.currentSchool = school if school
+      next()
+    else
+      next(new Error("School not found"))
+

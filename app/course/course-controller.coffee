@@ -67,15 +67,5 @@ exports.all = (req, res) ->
     if err
       res.render "error",
         status: 500
-
     else
       res.jsonp courses
-
-###
-Course verification interceptor
-###
-exports.verify = (req, res, next) ->
-  course = /(.*).laere(dev)?.co/.exec(req.headers.host)?[1]
-  console.log course
-  req.currentCourse = course if course
-  next()
