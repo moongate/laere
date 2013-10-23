@@ -7,12 +7,12 @@
     <form class="form clearfix" data-ng-submit="createOrUpdate()">
         <div class="form-group">
             <label class="control-label" for="name">Name</label>
-            <input type="text" data-ng-model="course.name" id="name" placeholder="My course" required class="form-control input-lg">
+            <input type="text" data-ng-model="course.name" id="name" placeholder="My course" required class="form-control input-lg" autofocus>
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="code">Code</label>
-            <input type="text" data-ng-model="course.code" id="code" placeholder="Course code" required class="form-control input-lg">
+            <label class="control-label" for="code">Abbreviation</label>
+            <input type="text" data-ng-model="course.code" id="code" placeholder="e.g. INF1005" required class="form-control input-lg">
         </div>
 
         <button type="submit" class="btn btn-success btn-lg pull-right">Create course  <span class="glyphicon glyphicon-ok-sign"></span></button>

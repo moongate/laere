@@ -1,14 +1,20 @@
-<section class="col-md-6 col-md-offset-3" data-ng-controller="CoursesController">
+<section class="row" data-ng-controller="CoursesController">
     <div class="page-header clearfix">
         <h2 class="pull-left">Courses</h2>
 		<a href="/#/courses/create" class="btn btn-success pull-right">Create new course</a>
     </div>
 
-	<ul class="courses unstyled">
-		<li data-ng-repeat="course in courses">
-			<h2><a data-ng-href="#/courses/{{course._id}}">{{course.name}}</a></h2>
-			<div>{{course.code}}</div>
-            <button class="btn" ng-click="remove(course)" ng-show="course._id">Remove</button>
-		</li>
-	</ul>
+<div class="row">
+	<div class="col-md-6" data-ng-repeat="course in courses">
+		<div class="panel panel-default">
+		  <div class="panel-heading clearfix">
+		    <h3 class="panel-title pull-left">{{course.name}} <small>{{course.code}}</small></h3> <i class="glyphicon glyphicon-trash pull-right" ng-click="remove(course)" ng-show="course._id"></i>
+		  </div>
+		  <div class="panel-body">
+		    Panel content
+		  </div>
+		</div>
+	</div>
+</div>
+
 </section>
