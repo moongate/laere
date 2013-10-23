@@ -3,6 +3,7 @@ Module dependencies.
 ###
 mongoose = require("mongoose")
 User = mongoose.model("User")
+_ = require('underscore')
 
 ###
 Auth callback
@@ -87,7 +88,7 @@ exports.destroy = (req, res) ->
 Show profile
 ###
 exports.show = (req, res) ->
-  res.jsonp req.profile
+  res.jsonp _.pick(req.profile, '_id', 'username', 'email', 'name', 'school','provider', 'permissions')
 
 ###
 Send User

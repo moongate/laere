@@ -1,4 +1,4 @@
-angular.module("laere.users").controller "UsersController", ($scope, $routeParams, $location, Global, Users) ->
+angular.module("laere.users").controller "UsersController", ($scope, $routeParams, $location, Global, Users, Schools) ->
   $scope.global = Global
 
   $scope.createOrUpdate = ->
@@ -12,7 +12,7 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
       name: $scope.user.name
       email: $scope.user.email
       username: $scope.user.username
-      schoolName: $scope.user.schoolName
+      school: $scope.user.school
     )
     user.$save (response) ->
       $location.path "users/" + response._id
@@ -20,7 +20,7 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
     @name = ""
     @email = ""
     @username = ""
-    @schoolName = ""
+    @school = ""
 
   $scope.remove = (user) ->
     user.$remove()
@@ -44,7 +44,14 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
     , (user) ->
       $scope.user = user
 
+  $scope.findSchools = ->
+    Schools.query (schools) ->
+      $scope.schools = schools
+
   if $routeParams.userId
     $scope.findOne()
+    # If we are editing, we need to show all available schools
+    if $location.path().indexOf('edit') isnt -1
+      $scope.findSchools()
   else
     $scope.find()

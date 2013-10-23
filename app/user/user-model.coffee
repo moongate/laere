@@ -22,7 +22,8 @@ UserSchema = new Schema(
   name: String
   email: String
   username: String
-  schoolName: String
+  # Name property of the school this user belongs to
+  school: String
   permissions:
     type: [String]
     'default': ["study"]
