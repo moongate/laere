@@ -1,4 +1,4 @@
-angular.module("laere").controller "HeaderController", ["$scope", "Global", ($scope, Global) ->
+angular.module("laere").controller "HeaderController", ($scope, Global) ->
   $scope.global = Global
   $scope.menu = [
     title: "Schools"
@@ -9,8 +9,4 @@ angular.module("laere").controller "HeaderController", ["$scope", "Global", ($sc
   ,
     title: "Courses"
     link: "courses"
-  ,
-    title: "Classrooms"
-    link: "classrooms"
   ]
-]
