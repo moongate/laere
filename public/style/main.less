@@ -22,7 +22,34 @@ h6 {font-weight: 300;}
 }
 
 .panel {
-    .glyphicon-trash {cursor: pointer}
+    position: relative;
+    a {
+        color: #08c;
+    }
+    .lead {
+        font-size: 28px;
+        small {
+            font-weight: 100;
+            line-height: 120%;
+            text-align: right;
+        }
+    }
+    .glyphicon-trash {
+        cursor: pointer;
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        background: #eee;
+        padding: 10px;
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-transition: all .4s ease-in-out;
+           -moz-transition: all .4s ease-in-out;
+             -o-transition: all .4s ease-in-out;
+                transition: all .4s ease-in-out;
+    }
+    &:hover .glyphicon-trash {opacity: 1;}
+    .meta {color: #666}
 }
 
 .content {
