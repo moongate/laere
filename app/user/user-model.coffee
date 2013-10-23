@@ -7,6 +7,14 @@ crypto = require("crypto")
 _ = require("underscore")
 authTypes = ["github", "twitter", "facebook", "google"]
 
+permissions = ["study",
+               "teach",
+               "createContent",
+               "manageClassroomTrack",
+               "manageCourseTrack",
+               "createClassroom",
+               "createCourse"]
+
 ###
 User Schema
 ###
@@ -15,6 +23,9 @@ UserSchema = new Schema(
   email: String
   username: String
   schoolName: String
+  permissions:
+    type: [String]
+    'default': ["study"]
   provider: String
   hashed_password: String
   salt: String
