@@ -32,6 +32,17 @@
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label">Permissions</label>
+            <div class="controls"
+                 data-ng-repeat="(permission, value) in user.permissions">
+                <label>
+                    <input type="checkbox"
+                           ng-model="user.permissions[permission]"/>
+                    <span>{{ 'user.permissions.' + permission | translate }}</span>
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
             <div class="controls">
                 <input type="submit" class="btn">
             </div>

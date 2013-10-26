@@ -5,3 +5,12 @@ angular.module("laere.users").factory "Users", ($resource) ->
   ,
     update:
       method: "PUT"
+
+angular.module("laere.users").value "UserPermissions",
+  study: undefined
+  teach: undefined
+  createContent: undefined
+  manageClassroomTrack: undefined
+  manageCourseTrack: undefined
+  createClassroom: undefined
+  createCourse: undefined

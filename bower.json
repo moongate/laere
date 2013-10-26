@@ -1,14 +1,17 @@
 {
-    "name": "laere",
-    "version": "0.1.0",
-    "dependencies": {
-        "bootstrap": "3.0.0",
-        "angular": "~1.0.6",
-        "angular-resource": "~1.0.6",
-        "angular-cookies": "~1.0.6",
-        "angular-bootstrap": "~0.4.0",
-        "angular-ui-utils": "0.0.4",
-        "json3": "~3.2.4",
-        "jquery": "~1.9.1"
-    }
+  "name": "laere",
+  "version": "0.1.0",
+  "dependencies": {
+    "bootstrap": "3.0.0",
+    "angular": "~1.0.6",
+    "angular-resource": "~1.0.6",
+    "angular-cookies": "~1.0.6",
+    "angular-bootstrap": "~0.4.0",
+    "angular-ui-utils": "0.0.4",
+    "json3": "~3.2.4",
+    "jquery": "~1.9.1",
+    "angular-translate": "~1.1.0",
+    "angular-translate-loader-static-files": "~0.1.5",
+    "lodash": "~2.2.1"
+  }
 }

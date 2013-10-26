@@ -1,0 +1,19 @@
+{
+    "user": {
+        "permissions": {
+            "study": "Study",
+            "teach": "Teach",
+            "createContent": "Create content",
+            "manageClassroomTrack": "Modificar sala de aula",
+            "manageCourseTrack": "Modificar curso",
+            "createClassroom": "Criar sala de aula",
+            "createCourse": "Criar curso"
+        }
+    },
+    "course": {
+
+    },
+    "school": {
+
+    }
+}

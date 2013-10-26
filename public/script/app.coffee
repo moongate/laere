@@ -1,11 +1,11 @@
-window.app = angular.module("laere", ["ngCookies", "ngResource",
+window.app = angular.module("laere", ["ngCookies", "ngResource", "pascalprecht.translate",
                                       "ui.bootstrap", "ui.route",
                                       "laere.schools", "laere.users", "laere.courses"])
 angular.module "laere.schools", []
 angular.module "laere.users", []
 angular.module "laere.courses", []
 
-window.app.factory "Global", [=>
+app.factory "Global", [=>
   @_data =
     user: window.user
     authenticated: !!window.user
@@ -17,7 +17,7 @@ window.app.factory "Global", [=>
 ]
 
 #Setting up route
-window.app.config ["$routeProvider", ($routeProvider) ->
+app.config ($routeProvider) ->
   $routeProvider
   .when "/schools",
     templateUrl: "views/schools/list.html"
@@ -46,7 +46,12 @@ window.app.config ["$routeProvider", ($routeProvider) ->
   .when "/",
     templateUrl: "views/index.html"
   .otherwise redirectTo: "/"
-]
+
+app.config ($translateProvider) ->
+  $translateProvider.useStaticFilesLoader
+    prefix: 'locale/'
+    suffix: '.json'
+  $translateProvider.preferredLanguage 'pt'
 
 app.run ($rootScope) ->
   $rootScope.school = window.school

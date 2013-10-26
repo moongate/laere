@@ -1,4 +1,4 @@
-angular.module("laere.users").controller "UsersController", ($scope, $routeParams, $location, Global, Users, Schools) ->
+angular.module("laere.users").controller "UsersController", ($scope, $routeParams, $location, Global, Users, Schools, UserPermissions) ->
   $scope.global = Global
 
   $scope.createOrUpdate = ->
@@ -13,6 +13,7 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
       email: $scope.user.email
       username: $scope.user.username
       school: $scope.user.school
+      permissions: $scope.user.permissions
     )
     user.$save (response) ->
       $location.path "users/" + response._id
@@ -21,6 +22,7 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
     @email = ""
     @username = ""
     @school = ""
+    @permissions = {}
 
   $scope.remove = (user) ->
     user.$remove()
@@ -42,6 +44,7 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
     Users.get
       userId: $routeParams.userId
     , (user) ->
+      user.permissions = _.extend UserPermissions, user.permissions
       $scope.user = user
 
   $scope.findSchools = ->
