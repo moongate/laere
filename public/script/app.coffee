@@ -1,5 +1,5 @@
-window.app = angular.module("laere", ["ngCookies", "ngResource", "pascalprecht.translate",
-                                      "ui.bootstrap", "ui.route",
+window.app = angular.module("laere", ["ngCookies", "ngResource", "ngRoute", "pascalprecht.translate",
+                                      "ui.bootstrap",
                                       "laere.schools", "laere.users", "laere.courses"])
 angular.module "laere.schools", []
 angular.module "laere.users", []
