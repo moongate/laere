@@ -7,10 +7,10 @@ angular.module("laere.users").factory "Users", ($resource) ->
       method: "PUT"
 
 angular.module("laere.users").value "UserPermissions",
-  study: undefined
-  teach: undefined
-  createContent: undefined
-  manageClassroomTrack: undefined
-  manageCourseTrack: undefined
-  createClassroom: undefined
-  createCourse: undefined
+  study: true
+  teach: false
+  createContent: false
+  manageClassroomTrack: false
+  manageCourseTrack: false
+  createClassroom: false
+  createCourse: false

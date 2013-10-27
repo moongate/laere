@@ -12,10 +12,11 @@ module.exports = (app, passport) ->
   app.get "/signout", users.signout
 
   # Users API
+  app.post "/signup", users.createSignUp
   app.post "/users", users.create
   app.post "/users/session", passport.authenticate("local",
     failureRedirect: "/signin"
-    failureFlash: "Invalid email or password."
+    failureFlash: "Invalid username or password."
   ), users.session
   app.get "/users/me", users.me
   app.get "/users", users.all

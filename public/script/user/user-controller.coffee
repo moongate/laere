@@ -1,5 +1,6 @@
 angular.module("laere.users").controller "UsersController", ($scope, $routeParams, $location, Global, Users, Schools, UserPermissions) ->
   $scope.global = Global
+  $scope.user = {}
 
   $scope.createOrUpdate = ->
     if $scope.user._id
@@ -11,6 +12,7 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
     user = new Users(
       name: $scope.user.name
       email: $scope.user.email
+      password: $scope.user.password
       username: $scope.user.username
       school: $scope.user.school
       permissions: $scope.user.permissions
@@ -44,8 +46,8 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
     Users.get
       userId: $routeParams.userId
     , (user) ->
-      user.permissions = _.extend UserPermissions, user.permissions
-      $scope.user = user
+        user.permissions = _.extend {}, UserPermissions, user.permissions
+        $scope.user = user
 
   $scope.findSchools = ->
     Schools.query (schools) ->
@@ -59,3 +61,5 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
   # If we are editing, we need to show all available schools
   if /(edit)|(create)/.test($location.path())
     $scope.findSchools()
+    if /(create)/.test($location.path())
+      $scope.user.permissions = _.extend {}, UserPermissions, $scope.user.permissions

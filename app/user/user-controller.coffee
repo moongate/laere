@@ -41,12 +41,11 @@ exports.session = (req, res) ->
   res.redirect "/"
 
 ###
-Create user
+Create user via signup page
 ###
-exports.create = (req, res) ->
+exports.createSignUp = (req, res) ->
   user = new User(req.body)
   user.provider = "local"
-  console.log user
   user.save (err) ->
     if err
       console.log err
@@ -58,6 +57,19 @@ exports.create = (req, res) ->
       console.log err
       return next(err)  if err
       res.redirect "/"
+
+###
+Create user via API
+###
+exports.create = (req, res) ->
+  user = new User(req.body)
+  user.provider = "local"
+  user.save (err) ->
+    if err
+      res.render "error",
+        status: 500
+    else
+      res.jsonp user
 
 ###
 Update a user
