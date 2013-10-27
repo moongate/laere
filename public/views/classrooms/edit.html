@@ -1,0 +1,42 @@
+<section class="col-md-12">
+    <form class="form clearfix" data-ng-submit="createOrUpdateClassroom()">
+        <div class="form-group">
+            <label class="control-label" for="name">Name</label>
+            <input type="text" data-ng-model="edit.classroom.name" id="name" placeholder="Classroom name" class="form-control input-lg">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="startDate">Start Date</label>
+            <input type="date" data-ng-model="edit.classroom.startDate" id="startDate" class="form-control input-lg">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="endDate">End Date</label>
+            <input type="date" data-ng-model="edit.classroom.endDate" id="endDate" class="form-control input-lg">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="addTeacher">Add Teacher</label>
+            <input type="text" id="addTeacher" ng-model="teacherUsername" placeholder="Teacher username" class="form-control input-lg">
+            <button ng-click="addTeacher(teacherUsername)">Add</button>
+        </div>
+        <div>
+            <p>Teachers:</p>
+            <ul data-ng-repeat="teacher in edit.classroom.teachers">
+                <li>{{teacher.name}} ({{teacher.username}})</li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="addStudent">Add Student</label>
+            <input type="text" id="addStudent" placeholder="Student username" class="form-control input-lg">
+            <button ng-click="addStudent(studentUsername)">Add</button>
+        </div>
+        <div>
+            <p>Students:</p>
+            <ul data-ng-repeat="student in edit.classroom.students">
+                <li>{{student.name}} ({{student.username}})</li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg" data-ng-show="edit.classroom.index != null">Update classroom  <span class="glyphicon glyphicon-ok-sign"></span></button>
+        <button type="submit" class="btn btn-success btn-lg" data-ng-hide="edit.classroom.index != null">Create classroom  <span class="glyphicon glyphicon-ok-sign"></span></button>
+        <button type="button" class="btn btn-link btn-lg" ng-click="edit.classroom = undefined">Cancel</span></button>
+    </form>
+</section>

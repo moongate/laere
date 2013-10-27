@@ -16,12 +16,13 @@
         </div>
 
         <div data-ng-show="course._id">
-            <button type="submit" class="btn btn-success btn-lg pull-right" data-ng-hide="edit.content">Update course  <span class="glyphicon glyphicon-ok-sign"></span></button>
+            <button type="submit" class="btn btn-success btn-lg pull-right" data-ng-hide="edit.content || edit.classroom">Update course  <span class="glyphicon glyphicon-ok-sign"></span></button>
         </div>
         <div data-ng-hide="course._id">
-            <button type="submit" class="btn btn-success btn-lg pull-right" data-ng-hide="edit.content">Create course  <span class="glyphicon glyphicon-ok-sign"></span></button>
+            <button type="submit" class="btn btn-success btn-lg pull-right" data-ng-hide="edit.content || edit.classroom">Create course  <span class="glyphicon glyphicon-ok-sign"></span></button>
         </div>
     </form>
 
     <div ng-include="'views/content/list.html'" class="row"></div>
+    <div ng-include="'views/classrooms/list.html'" class="row"></div>
 </section>

@@ -54,6 +54,19 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     $scope.edit.content = undefined
     return false
 
+  $scope.editClassroom = (index) ->
+    $scope.edit.classroom = angular.copy($scope.course.classrooms[index])
+    $scope.edit.classroom.index = index
+
+  $scope.createOrUpdateClassroom = ->
+    if $scope.edit.classroom.index?
+      $scope.course.classrooms[$scope.edit.classroom.index] = angular.copy($scope.edit.classroom)
+    else
+      $scope.edit.classroom.creator = Global.user._id
+      $scope.course.classrooms.push angular.copy($scope.edit.classroom)
+    $scope.edit.classroom = undefined
+    return false
+
   if $routeParams.courseId
     $scope.findOne()
   else

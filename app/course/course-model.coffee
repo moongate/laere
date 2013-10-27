@@ -43,17 +43,18 @@ ContentSchema = new Schema(
 Classroom Schema
 ###
 ClassroomSchema = new Schema(
+  name:
+    type: String
+    'default': ""
+    trim: true
+
   created:
     type: Date
     'default': Date.now
 
-  startDate:
-    type: Date
-    'default': Date.now
+  startDate: Date
 
-  endDate:
-    type: Date
-    'default': Date.now
+  endDate: Date
 
   creator:
     type: Schema.ObjectId

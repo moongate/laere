@@ -53,8 +53,9 @@ angular.module("laere.users").controller "UsersController", ($scope, $routeParam
 
   if $routeParams.userId
     $scope.findOne()
-    # If we are editing, we need to show all available schools
-    if $location.path().indexOf('edit') isnt -1
-      $scope.findSchools()
   else
     $scope.find()
+
+  # If we are editing, we need to show all available schools
+  if /(edit)|(create)/.test($location.path())
+    $scope.findSchools()
