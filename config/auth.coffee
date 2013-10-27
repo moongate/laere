@@ -17,7 +17,7 @@ module.exports = (app, passport, config) ->
     #	User authorizations routing middleware
     user:
       hasAuthorization: (req, res, next) ->
-        return res.send(401, "User is not authorized")  unless req.profile.id is req.user.id
+        return res.send(401, "User is not authorized")  unless (req.profile.id is req.user.id) or (req.user.permissions.manage)
         next()
 
     #	Article authorizations routing middleware
