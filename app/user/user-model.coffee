@@ -20,11 +20,9 @@ UserSchema = new Schema(
     type:
       study: Boolean
       teach: Boolean
-      createContent: Boolean
-      manageClassroomTrack: Boolean
-      manageCourseTrack: Boolean
-      createClassroom: Boolean
-      createCourse: Boolean
+      manage: Boolean
+      classroom: Boolean
+      course: Boolean
     'default':
       study: true
   provider: String

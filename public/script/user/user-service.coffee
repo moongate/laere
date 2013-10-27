@@ -9,8 +9,6 @@ angular.module("laere.users").factory "Users", ($resource) ->
 angular.module("laere.users").value "UserPermissions",
   study: true
   teach: false
-  createContent: false
-  manageClassroomTrack: false
-  manageCourseTrack: false
-  createClassroom: false
-  createCourse: false
+  manage: false
+  classroom: false
+  course: false

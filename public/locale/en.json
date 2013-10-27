@@ -3,11 +3,9 @@
         "permissions": {
             "study": "Study",
             "teach": "Teach",
-            "createContent": "Create content",
-            "manageClassroomTrack": "Modificar sala de aula",
-            "manageCourseTrack": "Modificar curso",
-            "createClassroom": "Criar sala de aula",
-            "createCourse": "Criar curso"
+            "manage": "Manage users and classes",
+            "classroom": "Edit classroom",
+            "course": "Edit course"
         }
     },
     "course": {
