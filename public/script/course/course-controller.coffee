@@ -26,6 +26,9 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
 
   $scope.update = ->
     course = $scope.course
+    for classroom in course.classrooms
+      for teacher, index in classroom.teachers
+        classroom.teachers[index] = teacher._id
     course.updated or= []
     course.updated.push new Date().getTime()
     course.$update ->
@@ -39,6 +42,9 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     Courses.get
       courseId: $routeParams.courseId
     , (course) ->
+      for classroom, index in course.classrooms
+        course.classrooms[index].startDate = new Date(classroom.startDate)
+        course.classrooms[index].endDate = new Date(classroom.endDate)
       $scope.course = course
 
   $scope.editContent = (index) ->
@@ -74,6 +80,26 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
   $scope.findStudents = ->
     Users.query {'permissions.study': true}, (students) ->
       $scope.students = students
+
+  $scope.addTeacher = (teacher) ->
+    console.log teacher
+    $scope.edit.classroom.teachers or= []
+    $scope.edit.classroom.teachers.push teacher
+    $scope.edit.classroom.teacherUsername = ''
+
+  $scope.existingTeacher = (added) ->
+    not _.find $scope.edit.classroom.teachers, (existing) -> existing._id is added._id
+
+  $scope.addStudent = (student) ->
+    console.log student
+    $scope.edit.classroom.students or= []
+    $scope.edit.classroom.students.push student
+    $scope.edit.classroom.studentUsername = ''
+
+  $scope.existingStudent = (added) ->
+    not (_.find $scope.edit.classroom.students, (existing) -> existing._id is added._id) and
+      not (_.find $scope.edit.classroom.teachers, (existing) -> existing._id is added._id)
+
 
   if $routeParams.courseId
     $scope.findOne()

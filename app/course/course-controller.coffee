@@ -63,9 +63,12 @@ exports.show = (req, res) ->
 List of Courses
 ###
 exports.all = (req, res) ->
-  Course.find().sort("-created").populate("creator").exec (err, courses) ->
-    if err
-      res.render "error",
-        status: 500
-    else
-      res.jsonp courses
+  Course.find()
+    .sort("-created")
+    .populate("creator")
+    .exec (err, courses) ->
+      if err
+        res.render "error",
+          status: 500
+      else
+        res.jsonp courses

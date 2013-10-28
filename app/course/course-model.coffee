@@ -60,13 +60,15 @@ ClassroomSchema = new Schema(
     type: Schema.ObjectId
     ref: "User"
 
-  teachers:
-    type: [Schema.ObjectId]
+  teachers: [
+    type: Schema.ObjectId
     ref: "User"
+  ]
 
-  students:
-    type: [Schema.ObjectId]
+  students: [
+    type: Schema.ObjectId
     ref: "User"
+  ]
 
   # An array of object Ids of Contents from parent course
   track: [String]
@@ -127,6 +129,10 @@ CourseSchema.path("code").validate ((label) ->
 Statics
 ###
 CourseSchema.statics = load: (id, cb) ->
-  @findOne(_id: id).populate("creator").exec cb
+  @findOne(_id: id)
+    .populate("creator")
+    .populate("classrooms.teachers")
+    .populate("classrooms.students")
+    .exec cb
 
 mongoose.model "Course", CourseSchema
