@@ -42,6 +42,10 @@ module.exports = (app, passport, config) ->
   app.use helpers(config.app.name) # dynamic helpers
   app.use passport.initialize()
   app.use passport.session() # use passport session
+  # Parse Booleans in req.query
+  app.use (req, res, next) ->
+    req.query[key] = (value is 'true') for key, value of req.query when value in ['true', 'false']
+    next()
   passport.setupRoutes()
   app.use app.router # routes should be the last
 

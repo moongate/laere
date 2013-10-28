@@ -1,4 +1,4 @@
-angular.module("laere.courses").controller "CoursesController", ($scope, $routeParams, $location, Global, Courses) ->
+angular.module("laere.courses").controller "CoursesController", ($scope, $routeParams, $location, Global, Courses, Users) ->
   $scope.global = Global
   $scope.edit = {}
 
@@ -67,7 +67,20 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     $scope.edit.classroom = undefined
     return false
 
+  $scope.findTeachers = ->
+    Users.query {'permissions.teach': true}, (teachers) ->
+      $scope.teachers = teachers
+
+  $scope.findStudents = ->
+    Users.query {'permissions.study': true}, (students) ->
+      $scope.students = students
+
   if $routeParams.courseId
     $scope.findOne()
   else
     $scope.find()
+
+  # If we are editing, we need to show all users
+  if /(edit)|(create)/.test($location.path()) and Global.user.permissions.manage
+    $scope.findTeachers()
+    $scope.findStudents()

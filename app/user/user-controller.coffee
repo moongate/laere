@@ -122,9 +122,9 @@ exports.user = (req, res, next, id) ->
 List of Users
 ###
 exports.all = (req, res) ->
-  User.find().sort("-username").exec (err, users) ->
+  User.find(req.query).sort("-username").exec (err, users) ->
     if err
       res.render "error",
         status: 500
     else
-      res.jsonp users
+      res.jsonp _.map users, (u) -> _.pick(u, '_id', 'username', 'email', 'name', 'school','provider', 'permissions')
