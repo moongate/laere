@@ -18,6 +18,7 @@ exports.signin = (req, res) ->
   res.render "users/signin",
     title: "Signin"
     message: req.flash("error")
+    env: (if process.env.NODE_ENV then JSON.stringify(process.env.NODE_ENV) else "'development'")
 
 ###
 Show sign up form
@@ -26,6 +27,7 @@ exports.signup = (req, res) ->
   res.render "users/signup",
     title: "Sign up"
     user: new User()
+    env: (if process.env.NODE_ENV then JSON.stringify(process.env.NODE_ENV) else "'development'")
 
 ###
 Logout
