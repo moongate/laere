@@ -23,6 +23,6 @@
         </div>
     </form>
 
-    <div ng-include="'views/content/list.html'" class="row"></div>
-    <div ng-include="'views/classrooms/list.html'" class="row"></div>
+    <div ng-include="'views/content/list.html'" class="row" data-ng-show="global.user.permissions.classroom"></div>
+    <div ng-include="'views/classrooms/list.html'" class="row" data-ng-show="global.user.permissions.manage"></div>
 </section>

@@ -100,7 +100,6 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     not (_.find $scope.edit.classroom.students, (existing) -> existing._id is added._id) and
       not (_.find $scope.edit.classroom.teachers, (existing) -> existing._id is added._id)
 
-
   if $routeParams.courseId
     $scope.findOne()
   else
