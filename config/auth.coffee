@@ -11,25 +11,32 @@ module.exports = (app, passport, config) ->
   passport.auth =
     #	Generic require login routing middleware
     requiresLogin: (req, res, next) ->
-      return res.send(401, "User is not authorized")  unless req.isAuthenticated()
+      unless req.isAuthenticated()
+        return res.send(401, "User is not authorized")
       next()
 
     #	User authorizations routing middleware
     user:
       hasAuthorization: (req, res, next) ->
-        return res.send(401, "User is not authorized")  unless (req.profile.id is req.user.id) or (req.user.permissions.manage)
+        unless (req.profile.id is req.user.id) or
+        (req.user.permissions.manage)
+          return res.send(401, "User is not authorized")
         next()
 
     #	Article authorizations routing middleware
     course:
       hasAuthorization: (req, res, next) ->
-        return res.send(401, "User is not authorized")  unless req.course.creator.id is req.user.id
+        unless req.course.creator.id is req.user.id or
+        (req.user.permissions.course)
+          return res.send(401, "User is not authorized")
         next()
 
     #	School authorizations routing middleware
     school:
       hasAuthorization: (req, res, next) ->
-        return res.send(401, "User is not authorized")  unless req.school.creator.id is req.user.id
+        unless req.school.creator.id is req.user.id or
+        (req.user.permissions.manage)
+          return res.send(401, "User is not authorized")
         next()
 
   #Serialize sessions

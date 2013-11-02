@@ -26,9 +26,6 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
 
   $scope.update = ->
     course = $scope.course
-    for classroom in course.classrooms
-      for teacher, index in classroom.teachers
-        classroom.teachers[index] = teacher._id
     course.updated or= []
     course.updated.push new Date().getTime()
     course.$update ->
