@@ -29,7 +29,7 @@ angular.module("laere.classrooms").controller "ClassroomsController", ($scope, $
       endDate: $scope.data.classroom.endDate
       creator: $scope.global.user._id
       course: $scope.data.course._id
-      teachers: $scope.data.classroom.teachers
+      teachers: _.map $scope.data.classroom.teachers, (t) -> t._id
     )
     classroom.$save ->
       Classrooms.query {'course': $scope.data.course._id}, (classrooms) ->
