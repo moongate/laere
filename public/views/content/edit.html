@@ -3,44 +3,44 @@
         <div class="form-group">
             <div class="radio">
                 <label class="control-label" for="type0">Video</label>
-                <input type="radio" data-ng-model="edit.content.type" id="type0" name="type" value="video">
+                <input type="radio" data-ng-model="data.content.type" id="type0" name="type" value="video">
             </div>
             <div class="radio">
                 <label class="control-label" for="type1">Exercise</label>
-                <input type="radio" data-ng-model="edit.content.type" id="type1" name="type" value="exercise">
+                <input type="radio" data-ng-model="data.content.type" id="type1" name="type" value="exercise">
             </div>
             <div class="radio">
                 <label class="control-label" for="type2">Slides</label>
-                <input type="radio" data-ng-model="edit.content.type" id="type2" name="type" value="slides">
+                <input type="radio" data-ng-model="data.content.type" id="type2" name="type" value="slides">
             </div>
             <div class="radio">
                 <label class="control-label" for="type3">Text</label>
-                <input type="radio" data-ng-model="edit.content.type" id="type3" name="type" value="text">
+                <input type="radio" data-ng-model="data.content.type" id="type3" name="type" value="text">
             </div>
             <div class="radio">
                 <label class="control-label" for="type4">Image</label>
-                <input type="radio" data-ng-model="edit.content.type" id="type4" name="type" value="image">
+                <input type="radio" data-ng-model="data.content.type" id="type4" name="type" value="image">
             </div>
         </div>
         <div class="form-group">
             <label class="control-label" for="name">Name</label>
-            <input type="text" data-ng-model="edit.content.name" id="name" placeholder="Content name" class="form-control input-lg">
+            <input type="text" data-ng-model="data.content.name" id="name" placeholder="Content name" class="form-control input-lg">
         </div>
         <div class="form-group">
             <label class="control-label" for="url">URL</label>
-            <input type="text" data-ng-model="edit.content.url" id="url" placeholder="Content URL" class="form-control input-lg">
+            <input type="text" data-ng-model="data.content.url" id="url" placeholder="Content URL" class="form-control input-lg">
         </div>
         <div class="form-group">
             <label class="control-label" for="description">Description</label>
-            <input type="text" data-ng-model="edit.content.description" id="description" placeholder="Content Description" class="form-control input-lg">
+            <input type="text" data-ng-model="data.content.description" id="description" placeholder="Content Description" class="form-control input-lg">
         </div>
         <div class="form-group">
             <label class="control-label" for="tags">Tags</label>
-            <input type="text" data-ng-model="edit.content.tags" id="tags" placeholder="Content tags" class="form-control input-lg">
+            <input type="text" data-ng-model="data.content.tags" id="tags" placeholder="Content tags" class="form-control input-lg">
         </div>
 
-        <button type="submit" class="btn btn-success btn-lg" data-ng-show="edit.content.index != null">Update content  <span class="glyphicon glyphicon-ok-sign"></span></button>
-        <button type="submit" class="btn btn-success btn-lg" data-ng-hide="edit.content.index != null">Create content  <span class="glyphicon glyphicon-ok-sign"></span></button>
-        <button type="button" class="btn btn-link btn-lg" ng-click="edit.content = undefined">Cancel</span></button>
+        <button type="submit" class="btn btn-success btn-lg" data-ng-show="data.content.index != null">Update content  <span class="glyphicon glyphicon-ok-sign"></span></button>
+        <button type="submit" class="btn btn-success btn-lg" data-ng-hide="data.content.index != null">Create content  <span class="glyphicon glyphicon-ok-sign"></span></button>
+        <button type="button" class="btn btn-link btn-lg" ng-click="data.content = undefined">Cancel</span></button>
     </form>
 </section>

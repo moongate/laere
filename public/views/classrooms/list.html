@@ -1,17 +1,16 @@
-<section class="col-md-12">
+<section class="col-md-12" ng-controller="ClassroomsController">
     <hr/>
     <h2 class="">Classrooms</h2>
 
-	<ul class="classrooms unstyled">
-		<li data-ng-repeat="classroom in course.classrooms" data-ng-hide="edit.classroom.index == $index">
-			<h2>{{classroom.name}}</h2>
-			<div>{{classroom.code}}</div>
-            <button class="btn" ng-click="editClassroom($index)">Edit</button>
-            <button class="btn" ng-click="course.classrooms.splice($index, 1)">Remove</button>
+	<ul class="classrooms unstyled" data-ng-hide="classroom">
+		<li data-ng-repeat="course_classroom in data.course.classrooms">
+			<h2>{{course_classroom.name}}</h2>
+            <button class="btn" ng-click="editClassroom(course_classroom)">Edit</button>
+            <button class="btn" ng-click="removeClassroom(course_classroom)">Remove</button>
 		</li>
 	</ul>
-    <div ng-include="'views/classrooms/edit.html'" data-ng-show="edit.classroom"></div>
+    <div ng-include="'views/classrooms/edit.html'" data-ng-show="data.classroom != undefined"></div>
     <div>
-        <button class="btn btn-success" ng-click="edit.classroom = {}" data-ng-hide="edit.classroom">Create new classroom</button>
+        <button class="btn btn-success" ng-click="newClassroom()" data-ng-hide="data.classroom">Create new classroom</button>
     </div>
 </section>

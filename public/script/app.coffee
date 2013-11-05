@@ -1,9 +1,11 @@
 window.app = angular.module("laere", ["ngCookies", "ngResource", "ngRoute", "pascalprecht.translate",
                                       "ui.bootstrap",
-                                      "laere.schools", "laere.users", "laere.courses"])
+                                      "laere.schools", "laere.users", "laere.courses", "laere.classrooms", "laere.progress"])
 angular.module "laere.schools", []
 angular.module "laere.users", []
 angular.module "laere.courses", []
+angular.module "laere.classrooms", []
+angular.module "laere.progress", []
 
 app.factory "Global", [=>
   @_data =

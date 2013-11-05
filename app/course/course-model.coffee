@@ -40,41 +40,6 @@ ContentSchema = new Schema(
 )
 
 ###
-Classroom Schema
-###
-ClassroomSchema = new Schema(
-  name:
-    type: String
-    'default': ""
-    trim: true
-
-  created:
-    type: Date
-    'default': Date.now
-
-  startDate: Date
-
-  endDate: Date
-
-  creator:
-    type: Schema.ObjectId
-    ref: "User"
-
-  teachers: [
-    type: Schema.ObjectId
-    ref: "User"
-  ]
-
-  students: [
-    type: Schema.ObjectId
-    ref: "User"
-  ]
-
-  # An array of object Ids of Contents from parent course
-  track: [String]
-)
-
-###
 Course Schema
 ###
 CourseSchema = new Schema(
@@ -108,8 +73,6 @@ CourseSchema = new Schema(
 
   contents: [ContentSchema]
 
-  classrooms: [ClassroomSchema]
-
   # An array of object Ids of Contents
   suggestedTrack: [String]
 )
@@ -131,8 +94,6 @@ Statics
 CourseSchema.statics = load: (id, cb) ->
   @findOne(_id: id)
     .populate("creator")
-    .populate("classrooms.teachers")
-    .populate("classrooms.students")
     .exec cb
 
 mongoose.model "Course", CourseSchema

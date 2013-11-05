@@ -23,11 +23,27 @@ module.exports = (app, passport, config) ->
           return res.send(401, "User is not authorized")
         next()
 
-    #	Article authorizations routing middleware
+    #	Course authorizations routing middleware
     course:
       hasAuthorization: (req, res, next) ->
         unless req.course.creator.id is req.user.id or
         (req.user.permissions.course)
+          return res.send(401, "User is not authorized")
+        next()
+
+    #	Classroom authorizations routing middleware
+    classroom:
+      hasAuthorization: (req, res, next) ->
+        unless req.classroom.creator.id is req.user.id or
+        (req.user.permissions.classroom)
+          return res.send(401, "User is not authorized")
+        next()
+
+    #	Progress authorizations routing middleware
+    progress:
+      hasAuthorization: (req, res, next) ->
+        unless req.progress.creator.id is req.user.id or
+        (req.user.permissions.progress)
           return res.send(401, "User is not authorized")
         next()
 

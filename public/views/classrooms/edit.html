@@ -1,8 +1,8 @@
 <section class="col-md-12">
-    <form class="form clearfix" data-ng-submit="createOrUpdateClassroom()">
+    <form class="form clearfix" data-ng-submit="createOrUpdate()">
         <div class="form-group">
             <label class="control-label" for="name">Name</label>
-            <input type="text" data-ng-model="edit.classroom.name" id="name" placeholder="Classroom name" class="form-control input-lg">
+            <input type="text" data-ng-model="data.classroom.name" id="name" placeholder="Classroom name" class="form-control input-lg">
         </div>
         <div class="form-group">
             <label class="control-label" for="startDate">Start Date</label>
@@ -10,7 +10,7 @@
                    id="startDate"
                    class="form-control input-lg"
                    datepicker-popup="dd-MMMM-yyyy"
-                   ng-model="edit.classroom.startDate"
+                   ng-model="data.classroom.startDate"
                    required="true" />
         </div>
         <div class="form-group">
@@ -19,7 +19,7 @@
                    id="endDate"
                    class="form-control input-lg"
                    datepicker-popup="dd-MMMM-yyyy"
-                   ng-model="edit.classroom.endDate"
+                   ng-model="data.classroom.endDate"
                    required="true" />
         </div>
         <div class="form-group">
@@ -27,39 +27,21 @@
             <input type="text"
                    class="form-control input-lg"
                    id="addTeacher"
-                   ng-model="edit.classroom.teacherUsername"
+                   ng-model="data.classroom.teacherUsername"
                    typeahead-on-select="addTeacher($item)"
-                   typeahead="teacher.username for teacher in teachers | filter:$viewValue | filter:existingTeacher | limitTo:8">
+                   typeahead="teacher.username for teacher in data.teachers | filter:$viewValue | filter:existingTeacher | limitTo:8">
         </div>
         <div>
             <p>Teachers:</p>
-            <ul data-ng-repeat="teacher in edit.classroom.teachers">
+            <ul data-ng-repeat="teacher in data.classroom.teachers">
                 <li>{{teacher.name}} ({{teacher.username}})
-                    <i class="glyphicon glyphicon-trash" ng-click="edit.classroom.teachers.splice($index, 1)"></i>
-                </li>
-            </ul>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="addStudent">Add Student</label>
-            <input type="text"
-                   class="form-control input-lg"
-                   id="addStudent"
-                   ng-model="edit.classroom.studentUsername"
-                   typeahead-on-select="addStudent($item)"
-                   typeahead="student.username for student in students | filter:$viewValue | filter:existingStudent | limitTo:8">
-            </div>
-        </div>
-        <div>
-            <p>Students:</p>
-            <ul data-ng-repeat="student in edit.classroom.students">
-                <li>{{student.name}} ({{student.username}})
-                    <i class="glyphicon glyphicon-trash" ng-click="edit.classroom.students.splice($index, 1)"></i>
+                    <i class="glyphicon glyphicon-trash" ng-click="data.classroom.teachers.splice($index, 1)"></i>
                 </li>
             </ul>
         </div>
 
-        <button type="submit" class="btn btn-success btn-lg" data-ng-show="edit.classroom.index != null">Update classroom  <span class="glyphicon glyphicon-ok-sign"></span></button>
-        <button type="submit" class="btn btn-success btn-lg" data-ng-hide="edit.classroom.index != null">Create classroom  <span class="glyphicon glyphicon-ok-sign"></span></button>
-        <button type="button" class="btn btn-link btn-lg" ng-click="edit.classroom = undefined">Cancel</span></button>
+        <button type="submit" class="btn btn-success btn-lg" data-ng-show="data.classroom._id != null">Update classroom  <span class="glyphicon glyphicon-ok-sign"></span></button>
+        <button type="submit" class="btn btn-success btn-lg" data-ng-hide="data.classroom._id != null">Create classroom  <span class="glyphicon glyphicon-ok-sign"></span></button>
+        <button type="button" class="btn btn-link btn-lg" ng-click="cancelClassroomEdit()">Cancel</span></button>
     </form>
 </section>

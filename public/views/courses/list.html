@@ -7,12 +7,16 @@
 <div class="row">
 	<div class="col-md-4" data-ng-repeat="course in courses">
 		<div class="panel panel-default">
-		  <div class="panel-body"><a data-ng-href="#/courses/{{course._id}}">
-		    <h2 class="panel-title lead"><span class="pull-left">{{course.name}}</span>
+		  <div class="panel-body">
+          <a data-ng-href="#/courses/{{course._id}}">
+            <h2 class="panel-title lead">
+                <span class="pull-left">{{course.name}}</span>
 		    	<small class="pull-right">
 		    		{{course.code}}<br>
 		    		<span class="meta">08 classrooms</span>
-		    	</small></a></h2>
+		    	</small>
+            </h2>
+          </a>
 
 		    <i class="glyphicon glyphicon-trash pull-right" ng-click="remove(course)" ng-show="course._id"></i>
 		  </div>
