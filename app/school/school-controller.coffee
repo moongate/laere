@@ -63,7 +63,7 @@ exports.show = (req, res) ->
 List of Schools
 ###
 exports.all = (req, res) ->
-  School.find().sort("-created").populate("creator").exec (err, schools) ->
+  School.find(req.query).sort("-created").populate("creator").exec (err, schools) ->
     if err
       res.render "error",
         status: 500

@@ -63,7 +63,7 @@ exports.show = (req, res) ->
 List of Classrooms
 ###
 exports.all = (req, res) ->
-  Classroom.find()
+  Classroom.find(req.query)
     .sort("-created")
     .populate("creator")
     .populate("teachers")

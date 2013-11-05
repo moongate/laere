@@ -63,7 +63,7 @@ exports.show = (req, res) ->
 List of Courses
 ###
 exports.all = (req, res) ->
-  Course.find()
+  Course.find(req.query)
     .sort("-created")
     .populate("creator")
     .exec (err, courses) ->
