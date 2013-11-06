@@ -33,6 +33,12 @@ module.exports = (app, passport, config) ->
   app.engine "ejs", engine
   app.set "view engine", "ejs" # Set template engine
   app.enable "jsonp callback" # Enable jsonp
+  # Redirect www to no-www
+  app.use (req, res, next) ->
+    if req.headers.host.match(/^www\..*/i)
+      res.redirect(301, req.protocol + '://' + req.headers.host.replace('www\.', ''))
+    else
+      next()
   app.use schools.verify
   app.use express.cookieParser() # cookieParser should be above session
   app.use express.bodyParser() # bodyParser should be above methodOverride
