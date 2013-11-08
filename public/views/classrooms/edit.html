@@ -22,22 +22,43 @@
                    ng-model="data.classroom.endDate"
                    required="true" />
         </div>
-        <div class="form-group">
-            <label class="control-label" for="addTeacher">Add Teacher</label>
-            <input type="text"
-                   class="form-control input-lg"
-                   id="addTeacher"
-                   ng-model="data.classroom.teacherUsername"
-                   typeahead-on-select="addTeacher($item)"
-                   typeahead="teacher.username for teacher in data.teachers | filter:$viewValue | filter:existingTeacher | limitTo:8">
-        </div>
-        <div>
-            <p>Teachers:</p>
-            <ul data-ng-repeat="teacher in data.classroom.teachers">
-                <li>{{teacher.name}} ({{teacher.username}})
-                    <i class="glyphicon glyphicon-trash" ng-click="data.classroom.teachers.splice($index, 1)"></i>
-                </li>
-            </ul>
+        <div data-ng-show="data.classroom._id">
+            <!--TEACHERS-->
+            <div class="form-group">
+                <label class="control-label" for="addTeacher">Add Teacher</label>
+                <input type="text"
+                       class="form-control input-lg"
+                       id="addTeacher"
+                       ng-model="data.classroom.teacherUsername"
+                       typeahead-on-select="addTeacher($item)"
+                       typeahead="teacher.username for teacher in data.teachers | filter:$viewValue | filter:existingTeacher | limitTo:8">
+            </div>
+            <div>
+                <p>Teachers:</p>
+                <ul data-ng-repeat="teacher in data.classroom.teachers">
+                    <li>{{teacher.name}} ({{teacher.username}})
+                        <i class="glyphicon glyphicon-trash" ng-click="data.classroom.teachers.splice($index, 1)"></i>
+                    </li>
+                </ul>
+            </div>
+            <!--STUDENTS-->
+            <div class="form-group">
+                <label class="control-label" for="addStudent">Add Student</label>
+                <input type="text"
+                       class="form-control input-lg"
+                       id="addStudent"
+                       ng-model="data.classroom.studentUsername"
+                       typeahead-on-select="addStudent($item)"
+                       typeahead="student.username for student in data.students | filter:$viewValue | filter:existingStudent | limitTo:8">
+            </div>
+            <div>
+                <p>Students:</p>
+                <ul data-ng-repeat="progress in data.classroom.progresses">
+                    <li>{{progress.student.name}} ({{progress.student.username}})
+                        <i class="glyphicon glyphicon-trash" ng-click="removeStudent(progress)"></i>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-success btn-lg" data-ng-show="data.classroom._id != null">Update classroom  <span class="glyphicon glyphicon-ok-sign"></span></button>

@@ -42,8 +42,8 @@ module.exports = (app, passport, config) ->
     #	Progress authorizations routing middleware
     progress:
       hasAuthorization: (req, res, next) ->
-        unless req.progress.creator.id is req.user.id or
-        (req.user.permissions.progress)
+        unless req.progress.student.id is req.user.id or
+        (req.user.permissions.manage)
           return res.send(401, "User is not authorized")
         next()
 

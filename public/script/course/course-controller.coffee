@@ -60,6 +60,10 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     Users.query {'permissions.teach': true}, (teachers) ->
       $scope.data.teachers = teachers
 
+  $scope.findStudents = ->
+    Users.query {'permissions.study': true}, (students) ->
+      $scope.data.students = students
+
   if $routeParams.courseId
     $scope.findOne()
   else
@@ -68,3 +72,4 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
   # If we are editing, we need to show all users
   if /(edit)|(create)/.test($location.path()) and Global.user.permissions.manage
     $scope.findTeachers()
+    $scope.findStudents()

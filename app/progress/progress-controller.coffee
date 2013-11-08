@@ -24,7 +24,7 @@ exports.create = (req, res) ->
   progress.creator = req.user
   progress.save (err) ->
     if err
-      res.send "progresss/create",
+      res.send "progress/create",
         errors: err.errors
         progress: progress
 
@@ -60,15 +60,16 @@ exports.show = (req, res) ->
   res.jsonp req.progress
 
 ###
-List of Progresss
+List of Progress
 ###
 exports.all = (req, res) ->
-  Progress.find()
+  Progress.find(req.query)
     .sort("-created")
-    .populate("creator")
-    .exec (err, progresss) ->
+    .populate("classroom")
+    .populate("student")
+    .exec (err, progress) ->
       if err
         res.render "error",
           status: 500
       else
-        res.jsonp progresss
+        res.jsonp progress

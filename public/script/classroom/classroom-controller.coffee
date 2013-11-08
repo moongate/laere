@@ -1,4 +1,4 @@
-angular.module("laere.classrooms").controller "ClassroomsController", ($scope, $routeParams, $location, Global, Classrooms) ->
+angular.module("laere.classrooms").controller "ClassroomsController", ($scope, $routeParams, $location, Global, Classrooms, Progress) ->
   $scope.global = Global
 
   $scope.newClassroom = ->
@@ -6,6 +6,9 @@ angular.module("laere.classrooms").controller "ClassroomsController", ($scope, $
 
   $scope.editClassroom = (classroom) ->
     $scope.data.classroom = classroom
+    Progress.query {classroom: $scope.data.classroom._id}, (progressList) ->
+      console.log progressList
+      $scope.data.classroom.progresses = progressList
 
   $scope.cancelClassroomEdit = ->
     $scope.data.classroom = undefined
@@ -60,3 +63,23 @@ angular.module("laere.classrooms").controller "ClassroomsController", ($scope, $
 
   $scope.existingTeacher = (added) ->
     not _.find $scope.data.classroom.teachers, (existing) -> existing._id is added._id
+
+  $scope.addStudent = (student) ->
+    console.log student
+    progress = new Progress(
+      classroom: $scope.data.classroom._id
+      student: student._id
+    )
+    progress.$save ->
+      Progress.query {classroom: $scope.data.classroom._id}, (progressList) ->
+        console.log progressList
+        $scope.data.classroom.progresses = progressList
+        $scope.data.classroom.studentUsername = ''
+
+  $scope.removeStudent = (progress) ->
+    progress.$remove()
+    for i of $scope.data.classroom.progresses
+      $scope.data.classroom.progresses.splice i, 1 if $scope.data.classroom.progresses[i] is progress
+
+  $scope.existingStudent = (added) ->
+    not _.find $scope.data.classroom.progresses, (existing) -> existing.student._id is added._id

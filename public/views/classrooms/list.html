@@ -2,7 +2,7 @@
     <hr/>
     <h2 class="">Classrooms</h2>
 
-	<ul class="classrooms unstyled" data-ng-hide="classroom">
+	<ul class="classrooms unstyled" data-ng-hide="data.classroom">
 		<li data-ng-repeat="course_classroom in data.course.classrooms">
 			<h2>{{course_classroom.name}}</h2>
             <button class="btn" ng-click="editClassroom(course_classroom)">Edit</button>
