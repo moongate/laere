@@ -36,7 +36,7 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="tags">Tags</label>
-            <input type="text" data-ng-model="data.content.tags" id="tags" placeholder="Content tags" class="form-control input-lg">
+            <input type="text" ng-list data-ng-model="data.content.tags" id="tags" placeholder="Content tags" class="form-control input-lg">
         </div>
 
         <button type="submit" class="btn btn-success btn-lg" data-ng-show="data.content.index != null">Update content  <span class="glyphicon glyphicon-ok-sign"></span></button>
