@@ -4,6 +4,7 @@ Module dependencies.
 mongoose = require("mongoose")
 async = require("async")
 Progress = mongoose.model("Progress")
+Course = mongoose.model("Course")
 _ = require("underscore")
 
 ###
@@ -63,13 +64,36 @@ exports.show = (req, res) ->
 List of Progress
 ###
 exports.all = (req, res) ->
-  Progress.find(req.query)
+  if req.query.student
+    Progress.find(req.query)
     .sort("-created")
     .populate("classroom")
+    .exec (err, progress) ->
+        if err
+          res.render "error",
+            status: 500
+        else
+          Progress.populate(progress, {
+            path: 'classroom.course'
+            select: 'code name'
+            model: Course
+          }, (err, pop) -> res.jsonp pop)
+  else if req.query.classroom
+    Progress.find(req.query)
+    .sort("-created")
     .populate("student")
     .exec (err, progress) ->
-      if err
-        res.render "error",
-          status: 500
-      else
-        res.jsonp progress
+        if err
+          res.render "error",
+            status: 500
+        else
+          res.jsonp progress
+  else
+    Progress.find(req.query)
+      .sort("-created")
+      .exec (err, progress) ->
+        if err
+          res.render "error",
+            status: 500
+        else
+          res.jsonp progress
