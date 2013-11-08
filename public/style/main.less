@@ -78,6 +78,16 @@ h6 {font-weight: 300;}
 
 a.list-group-item .list-group-item-heading {padding-right: 100px;}
 
+.editable {
+    -webkit-transition: 0.4s linear all;
+    transition: 0.4s linear all;
+
+    &:hover {
+        background: #FFFEDD;
+        cursor: text;
+    }
+}
+
 footer {
     position:fixed;
     left:0px;
@@ -98,7 +108,7 @@ footer p {
  The animate class is apart of the element and the ng-enter class
  is attached to the element once the enter animation event is triggered
 */
-.reveal-animation.ng-enter {
+.fade-in.ng-enter {
   -webkit-transition: 0.4s linear all; /* Safari/Chrome */
   transition: 0.4s linear all; /* All other modern browsers and IE10+ */
 
@@ -111,7 +121,7 @@ footer p {
  classes together to avoid any CSS-specificity
  conflicts
 */
-.reveal-animation.ng-enter.ng-enter-active {
+.fade-in.ng-enter.ng-enter-active {
   /* The animation code itself */
   opacity: 1;
 }

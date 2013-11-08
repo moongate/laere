@@ -14,7 +14,7 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
       code: $scope.data.course.code
     )
     course.$save (response) ->
-      $location.path "courses/" + response._id
+      $location.path "courses/" + response._id + "/edit"
 
     @name = ""
     @code = ""

@@ -1,6 +1,10 @@
-<section class="col-md-12">
-    <hr/>
-    <h2 class="">Contents</h2>
+<section>
+    <h4><span class="glyphicon glyphicon-file"></span> Contents</h4>
+
+    <div class="well well-lg text-center" data-ng-hide="data.content || data.course.contents.length > 0">
+        <p class="lead">There's no content yet :-(</p>
+        <button class="btn btn-default btn-lg" ng-click="data.content = {}" data-ng-hide="data.content">Create new content</button>
+    </div>
 
 	<ul class="contents unstyled">
 		<li data-ng-repeat="content in data.course.contents" data-ng-hide="data.content.index == $index">
@@ -12,6 +16,7 @@
 	</ul>
     <div ng-include="'views/content/edit.html'" data-ng-show="data.content"></div>
     <div>
-        <button class="btn btn-success" ng-click="data.content = {}" data-ng-hide="data.content">Create new content</button>
+        <button class="btn btn-success" ng-click="data.content = {}" 
+        data-ng-hide="data.content || data.course.contents.length === 0">Create new content</button>
     </div>
 </section>
