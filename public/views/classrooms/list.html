@@ -1,7 +1,8 @@
 <section ng-controller="ClassroomsController">
     <h4><span class="glyphicon glyphicon-ok"></span> Classrooms</h4>
 
-    <div class="well well-lg text-center" data-ng-hide="data.classroom || data.course.classroom.length > 0">
+    <div class="well well-lg text-center"
+    data-ng-hide="data.course.classrooms == undefined || data.classroom || data.course.classrooms.length > 0">
         <p class="lead">No classrooms yet :-(</p>
         <button class="btn btn-default btn-lg" ng-click="newClassroom()" data-ng-hide="data.classroom">Create new classroom</button>
     </div>
@@ -16,6 +17,6 @@
     <div ng-include="'views/classrooms/edit.html'" data-ng-show="data.classroom != undefined"></div>
     <div>
         <button class="btn btn-success" ng-click="newClassroom()" 
-        data-ng-hide="data.classroom || data.course.classrooms.length === 0">Create new classroom</button>
+        data-ng-hide="data.course.classrooms == undefined || data.classroom || data.course.classrooms.length === 0">Create new classroom</button>
     </div>
 </section>

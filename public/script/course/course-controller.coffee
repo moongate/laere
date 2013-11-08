@@ -29,7 +29,7 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     course.updated or= []
     course.updated.push new Date().getTime()
     course.$update ->
-      $location.path "courses/" + course._id
+      $location.path "courses/" + course._id + "/edit"
 
   $scope.find = (query) ->
     Courses.query query, (courses) ->
@@ -54,6 +54,7 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
       $scope.data.content.creator = Global.user._id
       $scope.data.course.contents.push angular.copy($scope.data.content)
     $scope.data.content = undefined
+    $scope.update()
     return false
 
   $scope.findTeachers = ->
