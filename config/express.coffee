@@ -23,11 +23,13 @@ module.exports = (app, passport, config) ->
       (/json|text|javascript|css/).test res.getHeader("Content-Type")
     level: 9
 
+  cacheOptions = if process.env.NODE_ENV is 'production' then {maxAge: 1000*60*60*24} else undefined
+
   app.set "showStackError", true
   app.use express.compress compressOptions # Should be before express.static
   app.use express.favicon() # Setting the fav icon and static folder
-  app.use express.static(config.root + "/public")
-  app.use harp.pipeline(config.root + "/public")
+  app.use express.static(config.root + "/public", cacheOptions)
+  app.use harp.mount(config.root + "/public")
   app.use express.logger("dev") if process.env.NODE_ENV isnt "test"
   app.set "views", config.root + "/app/views" # Set views path
   app.engine "ejs", engine

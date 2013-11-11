@@ -1,54 +1,55 @@
 {
-	"name": "laere",
-	"description": "The online classroom engine",
-	"version": "0.1.0",
-	"private": false,
-	"author": "Guilherme Rodrigues",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/gadr/clean.git"
-	},
-	"engines": {
-		"node": "0.10.x",
-		"npm": "1.2.x"
-	},
-	"scripts": {
-		"start": "grunt",
-		"test": "grunt test",
-		"postinstall": "bower install"
-	},
-	"dependencies": {
-		"express": "latest",
-		"ejs": "latest",
-		"ejs-locals": "latest",
-		"mongoose": "latest",
-		"connect-mongo": "latest",
-		"connect-flash": "latest",
-		"passport": "latest",
-		"passport-local": "latest",
-		"passport-facebook": "latest",
-		"passport-twitter": "latest",
-		"passport-github": "latest",
-		"passport-google-oauth": "latest",
-		"underscore": "latest",
-		"async": "latest",
-		"view-helpers": "latest",
-		"glob": "latest",
-		"mean-logger": "latest",
-		"harp": "latest"
-	},
-	"devDependencies": {
-        "supertest": "latest",
-        "should": "latest",
-        "grunt": "latest",
-        "grunt-contrib-coffee": "latest",
-        "grunt-contrib-watch": "latest",
-        "grunt-contrib-less": "latest",
-        "grunt-mocha-test": "latest",
-        "grunt-concurrent": "latest",
-        "grunt-nodemon": "latest"
-	},
-	"peerDependencies": {
-		"grunt-cli": "*"
-	}
+  "name": "laere",
+  "description": "The online classroom engine",
+  "version": "0.1.0",
+  "private": false,
+  "author": "Guilherme Rodrigues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gadr/clean.git"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "scripts": {
+    "start": "grunt",
+    "test": "grunt test",
+    "postinstall": "bower install"
+  },
+  "dependencies": {
+    "express": "latest",
+    "ejs": "latest",
+    "ejs-locals": "latest",
+    "mongoose": "latest",
+    "connect-mongo": "latest",
+    "connect-flash": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "passport-facebook": "latest",
+    "passport-twitter": "latest",
+    "passport-github": "latest",
+    "passport-google-oauth": "latest",
+    "underscore": "latest",
+    "async": "latest",
+    "view-helpers": "latest",
+    "glob": "latest",
+    "mean-logger": "latest",
+    "harp": "0.10.0"
+  },
+  "devDependencies": {
+    "supertest": "latest",
+    "should": "latest",
+    "grunt": "latest",
+    "grunt-contrib-coffee": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-mocha-test": "latest",
+    "grunt-concurrent": "latest",
+    "grunt-nodemon": "latest",
+    "grunt-release": "~0.6.0"
+  },
+  "peerDependencies": {
+    "grunt-cli": "*"
+  }
 }
