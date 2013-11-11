@@ -14,9 +14,9 @@
             <button class="btn" ng-click="data.course.contents.splice($index, 1)">Remove</button>
 		</li>
 	</ul>
-    <div ng-include="'views/content/edit.html'" data-ng-show="data.content"></div>
+    <div ng-include="'views/contents/edit.html'" data-ng-show="data.content"></div>
     <div>
-        <button class="btn btn-success" ng-click="data.content = {}" 
+        <button class="btn btn-success" ng-click="data.content = {}"
         data-ng-hide="data.content || data.course.contents.length === 0">Create new content</button>
     </div>
 </section>

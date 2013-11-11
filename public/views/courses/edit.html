@@ -1,12 +1,12 @@
 <div data-ng-controller="CoursesController">
-    
+
 <div class="page-header">
     <h2>Course</h2>
 </div>
 
 <aside class="col-md-12">
     <h3 class="editable" ng-click="showEdit = true" ng-show="!showEdit && data.course._id">
-    {{data.course.name}} 
+    {{data.course.name}}
         <small>
             {{data.course.code}}
         </small>
@@ -24,7 +24,7 @@
         </div>
 
         <div data-ng-show="data.course._id">
-            <button type="button" class="btn btn-link pull-left" 
+            <button type="button" class="btn btn-link pull-left"
             ng-click="showEdit = false">Cancel</button>
             <button type="submit" class="btn btn-success btn-lg pull-right" data-ng-hide="data.content || data.classroom">Update course  <span class="glyphicon glyphicon-ok-sign"></span></button>
         </div>
@@ -38,7 +38,7 @@
 <div class="row">
 
 <section>
-    <div class="col-md-6" ng-include="'views/content/list.html'"
+    <div class="col-md-6" ng-include="'views/contents/list.html'"
          class="row"
          data-ng-show="global.user.permissions.classroom && data.course._id"></div>
     <div class="col-md-6" ng-include="'views/classrooms/list.html'"
