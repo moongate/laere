@@ -1,9 +1,12 @@
+harp = require 'harp'
 module.exports = (grunt) ->
 
   pkg = grunt.file.readJSON('package.json')
 
   # Project Configuration
   grunt.initConfig
+    clean:
+      ['public/compiled', 'public/livereload']
     watch:
       public:
         files: ['public/**']
@@ -39,5 +42,13 @@ module.exports = (grunt) ->
   #Load NPM tasks
   grunt.loadNpmTasks name for name of pkg.devDependencies when name[0..5] is 'grunt-'
 
-  grunt.registerTask "default", ["concurrent"]
+  grunt.registerTask "default", ["clean", "concurrent"]
   grunt.registerTask "test", ["mochaTest"]
+  grunt.registerTask "dist", ["clean", "harp"]
+  grunt.registerTask "harp", ->
+    done = @async()
+    harp.compile './public/script', '../compiled/script', (err) ->
+      throw err if err
+      harp.compile './public/style', '../compiled/style', (err2) ->
+        throw err2 if err2
+        done()

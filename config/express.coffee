@@ -23,13 +23,19 @@ module.exports = (app, passport, config) ->
       (/json|text|javascript|css/).test res.getHeader("Content-Type")
     level: 9
 
-  cacheOptions = if process.env.NODE_ENV is 'production' then {maxAge: 1000*60*60*24} else undefined
-
+  # Enable cache for 1 year
+  app.use (req, res, next) ->
+    if /\.js|\.css|\.woff/.test(req.url)
+      console.log req.url
+      res.header "Cache-Control", "public"
+      res.header "Expires", new Date(Date.now() + 31536000000).toUTCString()
+    next()
   app.set "showStackError", true
   app.use express.compress compressOptions # Should be before express.static
   app.use express.favicon() # Setting the fav icon and static folder
-  app.use express.static(config.root + "/public", cacheOptions)
-  app.use harp.mount(config.root + "/public")
+  app.use express.static(config.root + "/public")
+  app.use express.static(config.root + "/public/compiled")
+  app.use harp.mount(config.root + "/public") if process.env.NODE_ENV isnt "production"
   app.use express.logger("dev") if process.env.NODE_ENV isnt "test"
   app.set "views", config.root + "/app/views" # Set views path
   app.engine "ejs", engine

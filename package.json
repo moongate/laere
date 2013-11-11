@@ -44,6 +44,7 @@
     "grunt-contrib-coffee": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-contrib-less": "latest",
+    "grunt-contrib-clean": "latest",
     "grunt-mocha-test": "latest",
     "grunt-concurrent": "latest",
     "grunt-nodemon": "latest",
