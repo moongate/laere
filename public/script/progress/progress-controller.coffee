@@ -32,7 +32,7 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
 
   $scope.find = (query) ->
     Progress.query query, (progressArray) ->
-      $scope.progressArray = progressArray
+      $scope.progresses = progressArray
 
   $scope.findOne = ->
     Progress.get
@@ -43,4 +43,4 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
   if $routeParams.progressId
     $scope.findOne()
   else
-    $scope.find()
+    $scope.find(student: Global.user._id)

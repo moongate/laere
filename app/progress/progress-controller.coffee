@@ -11,11 +11,18 @@ _ = require("underscore")
 Find progress by id
 ###
 exports.progress = (req, res, next, id) ->
-  Progress.load id, (err, progress) ->
-    return next(err)  if err
-    return next(new Error("Failed to load progress " + id))  unless progress
-    req.progress = progress
-    next()
+  Progress.findById(id)
+  .populate("classroom")
+  .exec (err, progress) ->
+      return next(err)  if err
+      return next(new Error("Failed to load progress " + id)) unless progress
+      Progress.populate(progress, {
+        path: 'classroom.course'
+        select: '_id code contents suggestedTrack details syllabus name created'
+        model: Course
+      }, (err, pop) ->
+        req.progress = pop
+        next())
 
 ###
 Create a progress
