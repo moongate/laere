@@ -32,6 +32,10 @@ module.exports = (grunt) ->
           logConcurrentOutput: true
           limit: 2
 
+    release:
+      options:
+        npm: false
+
   #Load NPM tasks
   grunt.loadNpmTasks name for name of pkg.devDependencies when name[0..5] is 'grunt-'
 
