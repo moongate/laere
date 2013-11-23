@@ -12,6 +12,9 @@ module.exports = (grunt) ->
         files: ['public/**']
         options:
           livereload: true
+      test:
+        files: ['test/**', 'app/**']
+        tasks: ['mochaTest']
 
     mochaTest:
       main:
@@ -30,7 +33,7 @@ module.exports = (grunt) ->
 
     concurrent:
       main:
-        tasks: ['nodemon', 'watch']
+        tasks: ['nodemon', 'watch:public']
         options:
           logConcurrentOutput: true
           limit: 2
@@ -43,7 +46,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks name for name of pkg.devDependencies when name[0..5] is 'grunt-'
 
   grunt.registerTask "default", ["clean", "concurrent"]
-  grunt.registerTask "test", ["mochaTest"]
+  grunt.registerTask "test", ["mochaTest", "watch:test"]
   grunt.registerTask "dist", ["clean", "harp"]
   grunt.registerTask "harp", ->
     done = @async()
