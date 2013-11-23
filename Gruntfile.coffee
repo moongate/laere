@@ -45,8 +45,9 @@ module.exports = (grunt) ->
   #Load NPM tasks
   grunt.loadNpmTasks name for name of pkg.devDependencies when name[0..5] is 'grunt-'
 
+  grunt.registerTask "test-env", -> process.env.NODE_ENV = 'test'
   grunt.registerTask "default", ["clean", "concurrent"]
-  grunt.registerTask "test", ["mochaTest", "watch:test"]
+  grunt.registerTask "test", ["test-env", "mochaTest", "watch:test"]
   grunt.registerTask "dist", ["clean", "harp"]
   grunt.registerTask "harp", ->
     done = @async()
