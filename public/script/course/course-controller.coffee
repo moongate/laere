@@ -28,8 +28,7 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     course = $scope.data.course
     course.updated or= []
     course.updated.push new Date().getTime()
-    course.$update ->
-      $location.path "courses/" + course._id + "/edit"
+    course.$update()
 
   $scope.find = (query) ->
     Courses.query query, (courses) ->
@@ -46,6 +45,10 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
   $scope.editContent = (index) ->
     $scope.data.content = angular.copy($scope.data.course.contents[index])
     $scope.data.content.index = index
+
+  $scope.removeContent = (index) ->
+    $scope.data.course.contents.splice(index, 1)
+    $scope.update()
 
   $scope.createOrUpdateContent = ->
     if $scope.data.content.index?

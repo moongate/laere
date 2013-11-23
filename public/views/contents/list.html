@@ -11,7 +11,7 @@
 			<h2>{{content.name}}</h2>
 			<div>{{content.code}}</div>
             <button class="btn" ng-click="editContent($index)">Edit</button>
-            <button class="btn" ng-click="data.course.contents.splice($index, 1)">Remove</button>
+            <button class="btn" ng-click="removeContent($index)">Remove</button>
 		</li>
 	</ul>
     <div ng-include="'views/contents/edit.html'" data-ng-show="data.content"></div>
