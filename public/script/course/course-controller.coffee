@@ -13,8 +13,7 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
       name: $scope.data.course.name
       code: $scope.data.course.code
     )
-    course.$save (response) ->
-      $location.path "courses/" + response._id + "/edit"
+    course.$save $scope.findClassrooms
 
     @name = ""
     @code = ""
@@ -28,7 +27,12 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     course = $scope.data.course
     course.updated or= []
     course.updated.push new Date().getTime()
-    course.$update()
+    course.$update $scope.findClassrooms
+
+  $scope.findClassrooms = ->
+    Classrooms.query('course': $scope.data.course._id).$promise
+    .then (classrooms) ->
+      $scope.data.course.classrooms = classrooms
 
   $scope.find = (query) ->
     Courses.query query, (courses) ->
@@ -38,9 +42,7 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
     Courses.get(courseId: $routeParams.courseId).$promise
     .then (course) ->
       $scope.data.course = course
-      Classrooms.query('course': course._id).$promise
-    .then (classrooms) ->
-      $scope.data.course.classrooms = classrooms
+      $scope.findClassrooms()
 
   $scope.editContent = (index) ->
     $scope.data.content = angular.copy($scope.data.course.contents[index])
