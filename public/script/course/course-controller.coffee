@@ -47,24 +47,6 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
       $scope.data.course = course
       $scope.findClassrooms()
 
-  $scope.editContent = (index) ->
-    $scope.data.content = angular.copy($scope.data.course.contents[index])
-    $scope.data.content.index = index
-
-  $scope.removeContent = (index) ->
-    $scope.data.course.contents.splice(index, 1)
-    $scope.update()
-
-  $scope.createOrUpdateContent = ->
-    if $scope.data.content.index?
-      $scope.data.course.contents[$scope.data.content.index] = angular.copy($scope.data.content)
-    else
-      $scope.data.content.creator = Global.user._id
-      $scope.data.course.contents.push angular.copy($scope.data.content)
-    $scope.data.content = undefined
-    $scope.update()
-    return false
-
   $scope.findTeachers = ->
     Users.query {'permissions.teach': true}, (teachers) ->
       $scope.data.teachers = teachers
