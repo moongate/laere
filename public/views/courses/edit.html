@@ -26,6 +26,8 @@
         <div data-ng-show="data.course._id">
             <button type="button" class="btn btn-link pull-left"
             ng-click="showEdit = false">Cancel</button>
+            <button type="button" class="btn btn-link pull-left"
+            ng-click="remove(data.course)">Remove course <i class="glyphicon glyphicon-remove"></i></button>
             <button type="submit" class="btn btn-success btn-lg pull-right" data-ng-hide="data.content || data.classroom">Update course  <span class="glyphicon glyphicon-ok-sign"></span></button>
         </div>
         <div data-ng-hide="data.course._id">

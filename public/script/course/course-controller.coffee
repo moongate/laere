@@ -13,21 +13,24 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
       name: $scope.data.course.name
       code: $scope.data.course.code
     )
-    course.$save $scope.findClassrooms
+    course.$save ->
+      $location.path 'courses/' + course._id + '/edit'
 
     @name = ""
     @code = ""
 
   $scope.remove = (course) ->
     course.$remove()
-    for i of $scope.courses
-      $scope.courses.splice i, 1  if $scope.courses[i] is course
+    $location.path 'courses/'
 
   $scope.update = ->
     course = $scope.data.course
     course.updated or= []
     course.updated.push new Date().getTime()
-    course.$update $scope.findClassrooms
+    classrooms = $scope.data.course.classrooms
+    course.$update ->
+      $scope.showEdit = false
+      $scope.data.course.classrooms = classrooms
 
   $scope.findClassrooms = ->
     Classrooms.query('course': $scope.data.course._id).$promise
