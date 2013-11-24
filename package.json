@@ -51,6 +51,7 @@
     "grunt-release": "~0.6.0"
   },
   "peerDependencies": {
-    "grunt-cli": "*"
+    "grunt-cli": "*",
+    "bower": "*"
   }
 }
