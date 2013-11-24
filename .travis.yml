@@ -7,3 +7,5 @@ services:
   - mongodb
 before_install:
   - npm install -g mocha coffee-script
+after_success:
+  "curl --data 'kalxen' http://laere.co:9001"
