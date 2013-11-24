@@ -14,8 +14,7 @@
   },
   "scripts": {
     "start": "grunt",
-    "test": "grunt test",
-    "postinstall": "bower install"
+    "test": "grunt test"
   },
   "dependencies": {
     "express": "latest",
