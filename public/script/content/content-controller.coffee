@@ -18,3 +18,15 @@ angular.module("laere.courses").controller "ContentsController", ($scope, $route
     $scope.data.content = undefined
     $scope.update()
     return false
+
+  $scope.$watch "data.content.url", (url, oldUrl) ->
+    return if url is oldUrl
+    regexTypeMap =
+      'video': /youtube\.com|vimeo\.com|youtu\.be/gi
+      'slides': /slid\.es|speakerdeck\.com/gi
+      'exercise': /docs\.google\.com\/forms|codepen\.io/gi
+      'image': /\.png|\.gif|\.jpg|\.jpeg/gi
+      'text': /\.pdf|\.doc|\.docx|\.txt/gi
+
+    for k, v of regexTypeMap
+      $scope.data.content.type = k if v.test url
