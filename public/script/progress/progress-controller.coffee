@@ -42,9 +42,7 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
       $scope.progress = progress
       $scope.classroom = progress.classroom
       $scope.course = progress.classroom.course
-      for solution in progress.solutions
-        content = $scope.course.contents[solution.content]
-        content.solution = solution
+      $scope.updateContents progress
       $scope.data.selectedContentIndex = $routeParams.contentIndex or 0
 
   $scope.$watch 'data.selectedContentIndex', (index, oldIndex) ->
@@ -53,16 +51,19 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
     unless solution and solution.seen
       $scope.progress.$seen {content: index}, (progress) ->
         $scope.progress = progress
-        for solution in progress.solutions
-          content = $scope.course.contents[solution.content]
-          content.solution = solution
+        $scope.updateContents progress
 
   $scope.unsee = ->
     $scope.progress.$seen {content: $scope.data.selectedContentIndex, seen: false}, (progress) ->
       $scope.progress = progress
-      for solution in progress.solutions
-        content = $scope.course.contents[solution.content]
-        content.solution = solution
+      $scope.updateContents progress
+
+  $scope.updateContents = (progress) ->
+    for solution in progress.solutions
+      content = $scope.course.contents[solution.content]
+      content.solution = solution
+    seen = _.reduce $scope.course.contents, ((memo, content) -> if content.solution?.seen then memo + 1 else memo ), 0
+    $scope.data.seenProgressStyle = {width: (seen / $scope.course.contents.length)*100 + '%'}
 
   if $routeParams.progressId
     $scope.findOne()
