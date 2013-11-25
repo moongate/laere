@@ -5,3 +5,8 @@ angular.module("laere.progress").factory "Progress", ($resource) ->
   ,
     update:
       method: "PUT"
+    seen:
+      method: "PUT"
+      params:
+        seen: true
+      url: "progress/:progressId/seen"

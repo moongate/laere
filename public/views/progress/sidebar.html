@@ -14,8 +14,9 @@
              style="cursor: pointer"
              data-ng-class="{'active': data.content === content}"
              data-ng-repeat="content in course.contents">
-            <span class="glyphicon glyphicon-asterisk pull-right badge-notif"></span>
-            <span class="badge">Evaluate</span>
+            <span data-ng-hide="content.solution.seen"
+                  class="glyphicon glyphicon-asterisk pull-right badge-notif"></span>
+            <span class="badge hide">Evaluate</span>
             <h5 class="list-group-item-heading">{{content.name}}</h5>
             <small class="list-group-item-text">{{content.description}}</small>
         </div>

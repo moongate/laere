@@ -16,6 +16,7 @@ ProgressSchema = new Schema(
     ref: "Classroom"
   solutions: [
     content: String
+    seen: Date
     interactions: [
       author: String
       message: String

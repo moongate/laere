@@ -57,6 +57,7 @@ module.exports = (app, passport) ->
   app.get "/progress/:progressId", progress.show
   app.put "/progress/:progressId", passport.auth.requiresLogin, passport.auth.progress.hasAuthorization, progress.update
   app.del "/progress/:progressId", passport.auth.requiresLogin, passport.auth.progress.hasAuthorization, progress.destroy
+  app.put "/progress/:progressId/seen", progress.seen
   app.param "progressId", progress.progress
 
   # Home route

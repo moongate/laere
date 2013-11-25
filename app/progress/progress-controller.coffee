@@ -68,6 +68,22 @@ exports.show = (req, res) ->
   res.jsonp req.progress
 
 ###
+Marks content as seen or not seen
+###
+exports.seen = (req, res) ->
+  contentIndex = req.query.content
+  seen = if req.query.seen then new Date() else null
+  solution = _.find req.progress.solutions, (s) -> s.content is contentIndex
+  if solution
+    solution.seen = seen
+  else
+    req.progress.solutions.push {content: contentIndex, seen: seen}
+  req.progress.save (err, progress) ->
+    if err
+      res.send 500
+    res.jsonp progress
+
+###
 List of Progress
 ###
 exports.all = (req, res) ->
