@@ -8,7 +8,7 @@ angular.module("laere").controller "HeaderController", ($scope, Global) ->
     link: "users"
   ,
     title: "My Classrooms"
-    link: "progress"
+    link: "classrooms"
   ,
     title: "Courses"
     link: "courses"

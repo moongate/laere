@@ -1,15 +1,21 @@
-<section class="col-md-6 col-md-offset-3" data-ng-controller="ProgressController">
+<section class="col-md-6 col-md-offset-3" data-ng-controller="ProgressController" data-ng-show="progresses.length > 0">
     <div class="page-header clearfix">
         <h1 class="pull-left">My Classrooms</h1>
     </div>
-
 	<div class="list-group progresses">
 	<a data-ng-href="#/progress/{{progress._id}}" class="list-group-item" data-ng-repeat="progress in progresses">
 		<span class="badge">04 <i class="glyphicon glyphicon-book"></i></span>
 	    <h4 class="list-group-item-heading">{{progress.classroom.course.name}}</h4>
 	    <p class="list-group-item-text">{{progress.classroom.name}}</p>
-         <button class="btn" ng-click="remove(progress)" ng-show="progress._id">Remove</button>
 	</a>
 	</div>
-
+</section>
+<section class="col-md-6 col-md-offset-3" data-ng-controller="TeachController" data-ng-show="classrooms.length > 0">
+	<div class="list-group classrooms">
+	<a data-ng-href="#/teach/{{classroom._id}}" class="list-group-item" data-ng-repeat="classroom in classrooms">
+		<span class="badge">04 <i class="glyphicon glyphicon-book"></i></span>
+	    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-lock text-muted"></i> {{classroom.course.name}}</h4>
+	    <p class="list-group-item-text">{{classroom.name}}</p>
+	</a>
+	</div>
 </section>

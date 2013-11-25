@@ -10,7 +10,9 @@ _ = require("underscore")
 Find classroom by id
 ###
 exports.classroom = (req, res, next, id) ->
-  Classroom.load id, (err, classroom) ->
+  Classroom.findById(id)
+  .populate("course")
+  .exec (err, classroom) ->
     return next(err)  if err
     return next(new Error("Failed to load classroom " + id))  unless classroom
     req.classroom = classroom
@@ -66,6 +68,7 @@ exports.all = (req, res) ->
   Classroom.find(req.query)
     .sort("-created")
     .populate("creator")
+    .populate("course")
     .populate("teachers")
     .exec (err, classrooms) ->
       if err

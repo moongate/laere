@@ -37,10 +37,14 @@ app.config ($routeProvider) ->
     templateUrl: "views/users/edit.html"
   .when "/users/:userId",
     templateUrl: "views/users/view.html"
-  .when "/progress",
+  .when "/classrooms",
     templateUrl: "views/progress/list.html"
   .when "/progress/:progressId",
     templateUrl: "views/progress/view.html"
+  .when "/teach/:classroomId",
+    templateUrl: "views/teach/view.html"
+  .when "/teach/:classroomId/:progressId",
+    templateUrl: "views/teach/view.html"
   .when "/courses",
     templateUrl: "views/courses/list.html"
   .when "/courses/create",
