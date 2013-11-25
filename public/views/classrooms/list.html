@@ -1,5 +1,5 @@
 <section ng-controller="ClassroomsController">
-    <h4><span class="glyphicon glyphicon-ok"></span> Classrooms</h4>
+    <h4><span class="glyphicon glyphicon-calendar"></span> Classrooms</h4>
 
     <div class="well well-lg text-center"
     data-ng-hide="data.course.classrooms == undefined || data.classroom || data.course.classrooms.length > 0">
@@ -7,11 +7,14 @@
         <button class="btn btn-default btn-lg" ng-click="newClassroom()" data-ng-hide="data.classroom">Create new classroom</button>
     </div>
 
-	<ul class="classrooms unstyled" data-ng-hide="data.classroom">
-		<li data-ng-repeat="course_classroom in data.course.classrooms">
-			<h2>{{course_classroom.name}}</h2>
-            <button class="btn" ng-click="editClassroom(course_classroom)">Edit</button>
-            <button class="btn" ng-click="removeClassroom(course_classroom)">Remove</button>
+	<ul class="classrooms list-group" data-ng-hide="data.classroom">
+		<li data-ng-repeat="course_classroom in data.course.classrooms" class="list-group-item">
+            <div class="btn-group btn-group-sm pull-right">
+                <button class="btn btn-default" ng-click="editClassroom(course_classroom)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+                <button class="btn btn-danger" ng-click="removeClassroom(course_classroom)">Remove</button>
+            </div>
+			<h4>{{course_classroom.name}}</h4>
+            <div class="text-muted"><span class="glyphicon glyphicon-time"></span> {{course_classroom.startDate | date}} - {{course_classroom.endDate | date}}</div>
 		</li>
 	</ul>
     <div ng-include="'views/classrooms/edit.html'" data-ng-show="data.classroom != undefined"></div>
