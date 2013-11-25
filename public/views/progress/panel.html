@@ -13,8 +13,7 @@
     <div class="panel-body c-video">
         <div class="page-header">
             <h2 class="text-success">{{data.content.name}}</h2>
-            <h4 class="text-muted">{{data.content.description}}</h4>
-
+            <div class="lead">{{data.content.description}}</div>
         </div>
 
         <div class="clearfix">
@@ -22,6 +21,8 @@
         </div>
 
         <div class="col-md-12">
+            <h4 class="text-muted"><a href="{{data.content.url}}">{{data.content.url}}</a></h4>
+
             <button class="btn btn-default btn-primary hide"><span class="glyphicon glyphicon-check"></span> Solve it</button>
             <button class="btn btn-default" ng-click="unsee()"><span class="glyphicon glyphicon-eye-close"></span> Mark as unseen</button>
         </div>

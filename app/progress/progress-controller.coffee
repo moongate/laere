@@ -100,7 +100,7 @@ exports.all = (req, res) ->
         else
           Progress.populate(progress, {
             path: 'classroom.course'
-            select: 'code name'
+            select: 'code name contents'
             model: Course
           }, (err, pop) -> res.jsonp pop)
   else if req.query.classroom
