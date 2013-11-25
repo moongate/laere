@@ -43,7 +43,6 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
       $scope.classroom = progress.classroom
       $scope.course = progress.classroom.course
       $scope.updateContents progress
-      $scope.data.selectedContentIndex = $routeParams.contentIndex or 0
 
   $scope.$watch 'data.selectedContentIndex', (index, oldIndex) ->
     return if index is oldIndex

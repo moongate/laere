@@ -12,7 +12,6 @@ angular.module("laere.progress").controller "TeachController", ($scope, $routePa
     , (classroom) ->
       $scope.classroom = classroom
       $scope.course = classroom.course
-      $scope.data.selectedContentIndex = $routeParams.contentIndex or 0
 
   $scope.findProgress = ->
     Progress.get

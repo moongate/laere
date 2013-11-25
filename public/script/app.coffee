@@ -41,13 +41,9 @@ app.config ($routeProvider) ->
     templateUrl: "views/progress/list.html"
   .when "/progress/:progressId",
     templateUrl: "views/progress/view.html"
-  .when "/progress/:progressId/:contentIndex",
-    templateUrl: "views/progress/view.html"
   .when "/teach/:classroomId",
     templateUrl: "views/teach/view.html"
   .when "/teach/:classroomId/progress/:progressId",
-    templateUrl: "views/teach/view.html"
-  .when "/teach/:classroomId/progress/:progressId/:contentIndex",
     templateUrl: "views/teach/view.html"
   .when "/courses",
     templateUrl: "views/courses/list.html"
