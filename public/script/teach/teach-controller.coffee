@@ -1,5 +1,6 @@
 angular.module("laere.progress").controller "TeachController", ($scope, $routeParams, $location, Global, Progress, Classrooms) ->
   $scope.global = Global
+  $scope.data = {}
 
   $scope.find = (query) ->
     Classrooms.query query, (classrooms) ->
@@ -11,12 +12,16 @@ angular.module("laere.progress").controller "TeachController", ($scope, $routePa
     , (classroom) ->
       $scope.classroom = classroom
       $scope.course = classroom.course
+      $scope.data.selectedContentIndex = $routeParams.contentIndex or 0
 
   $scope.findProgress = ->
     Progress.get
       progressId: $routeParams.progressId
     , (progress) ->
       $scope.progress = progress
+
+  $scope.selectContent = (content) ->
+    $scope.data.content = content
 
   if $routeParams.classroomId
     $scope.findClassroom()

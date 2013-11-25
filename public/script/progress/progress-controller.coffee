@@ -1,5 +1,6 @@
 angular.module("laere.progress").controller "ProgressController", ($scope, $routeParams, $location, Global, Progress) ->
   $scope.global = Global
+  $scope.data = {}
 
   $scope.createOrUpdate = ->
     if $scope.progress._id
@@ -41,6 +42,7 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
       $scope.progress = progress
       $scope.classroom = progress.classroom
       $scope.course = progress.classroom.course
+      $scope.data.selectedContentIndex = $routeParams.contentIndex or 0
 
   if $routeParams.progressId
     $scope.findOne()
