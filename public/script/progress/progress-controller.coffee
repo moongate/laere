@@ -39,6 +39,8 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
       progressId: $routeParams.progressId
     , (progress) ->
       $scope.progress = progress
+      $scope.classroom = progress.classroom
+      $scope.course = progress.classroom.course
 
   if $routeParams.progressId
     $scope.findOne()

@@ -2,93 +2,14 @@
 
 <div class="page-header clearfix">
 	<div class="col-md-9">
-		<h2>{{progress.classroom.course.name}} <small>{{progress.classroom.course.code}}</small></h2>
+		<h2>{{course.name}} <small>{{course.code}}</small></h2>
 	</div>
-
-	<div class="col-md-3">
-		<select class="form-control">
-		  <option>Michael Jackson</option>
-		  <option>Tristique Cursus</option>
-		  <option>Adipiscing Tortor</option>
-		  <option>Ridiculus Adipiscing</option>
-		  <option>Lorem Ornare</option>
-		</select>
-	</div>
-
 </div>
 
 <div class="row">
-	<div class="col-md-4 sidebar-progress">
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		  	<span class="badge pull-right">{{progress.classroom.course.contents.length}}</span> {{progress.classroom.name}} 
-			
-			<div class="progress">
-			  <div class="progress-bar" style="width: 20%;">
-			  </div>
-			</div>
-
-		  </div>
-			<div class="list-group">
-			  <a href="{{content.url}}" class="list-group-item" data-ng-repeat="content in progress.classroom.course.contents">
-			  	<span class="glyphicon glyphicon-asterisk pull-right badge-notif"></span>
-			  	<span class="badge">Evaluate</span>
-			    <h5 class="list-group-item-heading">{{content.name}}</h5>
-			    <small class="list-group-item-text">{{content.description}}</small>
-			  </a>
-			</div>
-		</div><!-- /panel -->
-
+	<div class="col-md-4 sidebar-progress" ng-include="'views/progress/sidebar.html'">
 	</div>
-
-	<div class="col-md-8">
-		<div class="panel panel-default">
-			<div class="panel-heading clearfix">
-
-			<button class="btn btn-default btn-pages prev pull-left"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
-
-			<button class="btn btn-default btn-pages next pull-right"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
-
-			</div>
-		  <div class="panel-body c-video">
-			<iframe width="560" height="315" src="//www.youtube.com/embed/rgK0eYISasE" frameborder="0" allowfullscreen></iframe>
-
-			<div class="pull-right">
-			  	<button class="btn btn-default btn-primary"><span class="glyphicon glyphicon-check"></span> Responder</button>
-			  	<button class="btn btn-default"><span class="glyphicon glyphicon-eye-close"></span> Marcar como não visualizado</button>
-			</div>
-		  </div>
-
-		  <div class="panel-footer issues-list">
-
-			<div class="media">
-			  <div class="pull-left" href="#">
-			    <span class="glyphicon glyphicon-user"></span>
-			  </div>
-			  <div class="media-body">
-			    <h4 class="media-heading">Michael Jackson</h4>
-			    <p>
-				Aenean lacinia bibendum nulla sed consectetur. Maecenas faucibus mollis interdum. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum.
-			    </p>
-			  </div>
-			</div>
-
-			<div class="media">
-			  <div class="pull-left" href="#">
-			    <span class="glyphicon glyphicon-user"></span>
-			  </div>
-			  <div class="media-body">
-			    <h4 class="media-heading">Michael Jackson</h4>
-			    <p>
-				Aenean lacinia bibendum nulla sed consectetur. Maecenas faucibus mollis interdum. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum.
-			    </p>
-			  </div>
-			</div>
-
-			<textarea class="form-control" rows="2" placeholder="Dúvidas e comentários"></textarea>
-	  		<button class="btn btn-default btn-block btn-success">Publicar</button>
-		  </div>
-		</div>
+	<div class="col-md-8" ng-include="'views/progress/panel.html'">
 	</div>
 </div>
 

@@ -10,6 +10,7 @@ angular.module("laere.progress").controller "TeachController", ($scope, $routePa
       classroomId: $routeParams.classroomId
     , (classroom) ->
       $scope.classroom = classroom
+      $scope.course = classroom.course
 
   $scope.findProgress = ->
     Progress.get

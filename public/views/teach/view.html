@@ -1,4 +1,26 @@
 <section data-ng-controller="TeachController">
-	<h2>{{classroom.course.code}} - {{classroom.course.name}}</h2>
-	<p>{{classroom.name}}</p>
+    <div class="page-header clearfix">
+        <div class="col-md-9">
+            <h2>{{course.name}} <small>{{course.code}}</small></h2>
+        </div>
+
+        <div class="col-md-3">
+            <select class="form-control">
+                <option>Michael Jackson</option>
+                <option>Tristique Cursus</option>
+                <option>Adipiscing Tortor</option>
+                <option>Ridiculus Adipiscing</option>
+                <option>Lorem Ornare</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 sidebar-progress" ng-include="'views/progress/sidebar.html'">
+        </div>
+        <div class="col-md-8" ng-include="'views/progress/panel.html'">
+        </div>
+    </div>
+
 </section>
