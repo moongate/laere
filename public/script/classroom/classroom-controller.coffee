@@ -48,8 +48,10 @@ angular.module("laere.classrooms").controller "ClassroomsController", ($scope, $
 
   $scope.update = ->
     classroom = $scope.data.classroom
+    delete classroom.creator
     classroom.updated or= []
     classroom.updated.push new Date().getTime()
+    classroom.teachers = _.map classroom.teachers, (t) -> t._id
     classroom.$update ->
       Classrooms.query {'course': $scope.data.course._id}, (classrooms) ->
         $scope.data.course.classrooms = classrooms

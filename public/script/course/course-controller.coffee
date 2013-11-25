@@ -25,6 +25,7 @@ angular.module("laere.courses").controller "CoursesController", ($scope, $routeP
 
   $scope.update = ->
     course = $scope.data.course
+    delete course.creator
     course.updated or= []
     course.updated.push new Date().getTime()
     classrooms = $scope.data.course.classrooms

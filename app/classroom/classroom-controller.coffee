@@ -40,6 +40,9 @@ exports.update = (req, res) ->
   classroom = req.classroom
   classroom = _.extend(classroom, req.body)
   classroom.save (err) ->
+    if err
+      console.log err
+      res.send 500
     res.jsonp classroom
 
 ###
