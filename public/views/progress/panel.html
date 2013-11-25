@@ -4,17 +4,26 @@
                 ng-click="backward()">
             <span class="glyphicon glyphicon-circle-arrow-left"></span>
         </button>
-        <span>{{data.content.name}}</span>
+
         <button class="btn btn-default btn-pages next pull-right"
                 ng-click="forward()">
             <span class="glyphicon glyphicon-circle-arrow-right"></span>
         </button>
     </div>
     <div class="panel-body c-video">
-        <laere-embed></laere-embed>
-        <div class="pull-right">
-            <button class="btn btn-default btn-primary hide"><span class="glyphicon glyphicon-check"></span> Responder</button>
-            <button class="btn btn-default" ng-click="unsee()"><span class="glyphicon glyphicon-eye-close"></span> Marcar como não visualizado</button>
+        <div class="page-header">
+            <h2 class="text-success">{{data.content.name}}</h2>
+            <h4 class="text-muted">{{data.content.description}}</h4>
+
+        </div>
+        
+        <div class="clearfix">
+            <laere-embed></laere-embed>
+        </div>
+
+        <div class="col-md-12">
+            <button class="btn btn-default btn-primary hide"><span class="glyphicon glyphicon-check"></span> Solve it</button>
+            <button class="btn btn-default" ng-click="unsee()"><span class="glyphicon glyphicon-eye-close"></span> Keep it as unseen</button>
         </div>
     </div>
     <div class="panel-footer issues-list hide">
@@ -40,7 +49,7 @@
                 </p>
             </div>
         </div>
-        <textarea class="form-control" rows="2" placeholder="Dúvidas e comentários"></textarea>
+        <textarea class="form-control" rows="2" placeholder="Issues and comments"></textarea>
         <button class="btn btn-default btn-block btn-success">Publicar</button>
     </div>
 </div>

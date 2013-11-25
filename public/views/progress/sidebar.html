@@ -3,7 +3,7 @@
         <span class="badge pull-right">{{course.contents.length}}</span> {{classroom.name}}
 
         <div class="progress">
-            <div class="progress-bar" ng-style="data.seenProgressStyle">
+            <div class="progress-bar progress-bar-success" ng-style="data.seenProgressStyle">
             </div>
         </div>
 
@@ -15,7 +15,7 @@
              data-ng-class="{'active': data.content === content}"
              data-ng-repeat="content in course.contents">
             <span data-ng-hide="content.solution.seen"
-                  class="glyphicon glyphicon-asterisk pull-right badge-notif"></span>
+                  class="glyphicon glyphicon-asterisk pull-right badge-notif text-success"></span>
             <span class="badge hide">Evaluate</span>
             <h5 class="list-group-item-heading">{{content.name}}</h5>
             <small class="list-group-item-text">{{content.description}}</small>
