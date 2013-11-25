@@ -43,6 +43,9 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
       $scope.classroom = progress.classroom
       $scope.course = progress.classroom.course
       $scope.updateContents progress
+      lastSeenIndex = (_.filter($scope.course.contents, (c) -> c.solution?.seen).length - 1)
+      lastSeenIndex = 0 if lastSeenIndex is -1
+      $scope.data.selectedContentIndex = lastSeenIndex
 
   $scope.$watch 'data.selectedContentIndex', (index, oldIndex) ->
     return if index is oldIndex
@@ -58,9 +61,9 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
       $scope.updateContents progress
 
   $scope.updateContents = (progress) ->
-    for solution in progress.solutions
-      content = $scope.course.contents[solution.content]
-      content.solution = solution
+    for solution in progress.solutions when solution.content
+      content = $scope.course.contents[parseInt(solution.content, 10)]
+      content?.solution = solution
     seen = _.reduce $scope.course.contents, ((memo, content) -> if content.solution?.seen then memo + 1 else memo ), 0
     $scope.data.seenProgressStyle = {width: (seen / $scope.course.contents.length)*100 + '%'}
 

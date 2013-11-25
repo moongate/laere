@@ -73,6 +73,8 @@ Marks content as seen or not seen
 exports.seen = (req, res) ->
   contentIndex = req.query.content
   seen = if req.query.seen then new Date() else null
+  if contentIndex < 0
+    return res.send 500
   solution = _.find req.progress.solutions, (s) -> s.content is contentIndex
   if solution
     solution.seen = seen
