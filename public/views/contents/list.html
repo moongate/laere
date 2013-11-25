@@ -6,8 +6,8 @@
         <button class="btn btn-default btn-lg" ng-click="data.content = {}" data-ng-hide="data.content">Create new content</button>
     </div>
 
-	<ul class="contents unstyled">
-		<li data-ng-repeat="content in data.course.contents" data-ng-hide="data.content.index == $index">
+	<ul class="contents unstyled" data-ng-hide="data.content">
+		<li data-ng-repeat="content in data.course.contents">
 			<h2>{{content.name}}</h2>
 			<div>{{content.code}}</div>
             <button class="btn" ng-click="editContent($index)">Edit</button>
