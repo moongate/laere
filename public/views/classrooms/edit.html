@@ -45,8 +45,13 @@
         <div class="panel panel-default">
             <div class="panel-heading"><span class="badge pull-right">{{data.classroom.teachers.length}}</span> Teachers</div>
             <ul data-ng-repeat="teacher in data.classroom.teachers" class="list-group">
-                <li class="list-group-item">{{teacher.name}} ({{teacher.username}})
-                  <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="data.classroom.teachers.splice($index, 1)">Remove</button>
+                <li class="list-group-item">
+                  <div class="row">
+                    <span class="col-md-8">{{teacher.name}} ({{teacher.username}})</span>
+                    <span class="col-md-4">
+                      <button type="button" class="btn btn-danger btn-xs btn-block" ng-click="data.classroom.teachers.splice($index, 1)">Remove</button>
+                    </span>
+                  </div>
                 </li>
             </ul>
         </div>
@@ -67,8 +72,13 @@
         <div class="panel panel-default">
             <div class="panel-heading"><span class="badge pull-right">{{data.classroom.progresses.length}}</span> Students</div>
             <ul data-ng-repeat="progress in data.classroom.progresses" class="list-group">
-                <li class="list-group-item">{{progress.student.name}} ({{progress.student.username}})
-                  <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="removeStudent(progress)">Remove</button>
+                <li class="list-group-item">
+                  <div class="row">
+                    <span class="col-md-8">{{progress.student.name}} ({{progress.student.username}})</span>
+                    <span class="col-md-4">
+                    <button type="button" class="btn btn-danger btn-xs btn-block" ng-click="removeStudent(progress)">Remove</button>
+                    </span>
+                  </div>
                 </li>
             </ul>
         </div>
