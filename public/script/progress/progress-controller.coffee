@@ -42,7 +42,9 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
       $scope.progress = progress
       $scope.classroom = progress.classroom
       $scope.course = progress.classroom.course
-      $scope.updateContents progress
+      for solution in progress.solutions when solution.content
+        content = $scope.course.contents[parseInt(solution.content, 10)]
+        content?.solution = solution
       lastSeenIndex = (_.filter($scope.course.contents, (c) -> c.solution?.seen).length - 1)
       lastSeenIndex = 0 if lastSeenIndex is -1
       $scope.data.selectedContentIndex = lastSeenIndex
@@ -52,20 +54,11 @@ angular.module("laere.progress").controller "ProgressController", ($scope, $rout
     solution = _.find $scope.progress.solutions, (s) -> s.content is index+""
     unless solution and solution.seen
       $scope.progress.$seen {content: index}, (progress) ->
-        $scope.progress = progress
-        $scope.updateContents progress
+        $scope.progress = angular.copy progress
 
   $scope.unsee = ->
     $scope.progress.$seen {content: $scope.data.selectedContentIndex, seen: false}, (progress) ->
-      $scope.progress = progress
-      $scope.updateContents progress
-
-  $scope.updateContents = (progress) ->
-    for solution in progress.solutions when solution.content
-      content = $scope.course.contents[parseInt(solution.content, 10)]
-      content?.solution = solution
-    seen = _.reduce $scope.course.contents, ((memo, content) -> if content.solution?.seen then memo + 1 else memo ), 0
-    $scope.data.seenProgressStyle = {width: (seen / $scope.course.contents.length)*100 + '%'}
+      $scope.progress = angular.copy progress
 
   if $routeParams.progressId
     $scope.findOne()

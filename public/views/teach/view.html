@@ -4,12 +4,10 @@
             <h2>{{course.name}} <small>{{course.code}}</small></h2>
         </div>
         <div class="col-md-3">
-            <select class="form-control">
-                <option>Michael Jackson</option>
-                <option>Tristique Cursus</option>
-                <option>Adipiscing Tortor</option>
-                <option>Ridiculus Adipiscing</option>
-                <option>Lorem Ornare</option>
+            <select class="form-control"
+                    ng-model="progress"
+                    ng-options="progress.student.name for (key, progress) in progresses">
+                <option value="">select a student</option>
             </select>
         </div>
     </div>
