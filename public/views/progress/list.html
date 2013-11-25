@@ -1,7 +1,7 @@
+<div class="page-header clearfix">
+    <h1 class="pull-left">My Classrooms</h1>
+</div>
 <section class="col-md-6 col-md-offset-3" data-ng-controller="ProgressController" data-ng-show="progresses.length > 0">
-    <div class="page-header clearfix">
-        <h1 class="pull-left">My Classrooms</h1>
-    </div>
 	<div class="list-group progresses">
 	<a data-ng-href="#/progress/{{progress._id}}" class="list-group-item" data-ng-repeat="progress in progresses">
 		<span class="badge">{{progress.classroom.course.contents.length}} <i class="glyphicon glyphicon-book"></i></span>
