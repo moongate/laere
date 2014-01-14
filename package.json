@@ -33,8 +33,7 @@
     "async": "latest",
     "view-helpers": "latest",
     "glob": "latest",
-    "mean-logger": "latest",
-    "harp": "0.10.0"
+    "mean-logger": "latest"
   },
   "devDependencies": {
     "supertest": "latest",

@@ -5,7 +5,6 @@ express = require("express")
 mongoStore = require("connect-mongo")(express)
 flash = require("connect-flash")
 helpers = require("view-helpers")
-harp = require("harp")
 engine = require('ejs-locals')
 schools = require("../app/school/school-controller")
 
@@ -34,8 +33,6 @@ module.exports = (app, passport, config) ->
   app.use express.compress compressOptions # Should be before express.static
   app.use express.favicon() # Setting the fav icon and static folder
   app.use express.static(config.root + "/public")
-  app.use express.static(config.root + "/public/compiled")
-  app.use harp.mount(config.root + "/public") if process.env.NODE_ENV isnt "production"
   app.use express.logger("dev") if process.env.NODE_ENV isnt "test"
   app.set "views", config.root + "/app/views" # Set views path
   app.engine "ejs", engine
