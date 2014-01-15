@@ -5,8 +5,13 @@ mongoose = require("mongoose")
 async = require("async")
 _ = require("underscore")
 exports.render = (req, res) ->
-  res.render "index",
-    user: (if req.user then JSON.stringify(req.user) else "null")
-    school: (if req.currentSchool then JSON.stringify(req.currentSchool) else "null")
-    env: (if process.env.NODE_ENV then JSON.stringify(process.env.NODE_ENV) else "'development'")
-    host: (if process.env.NODE_ENV is 'production' then "'laere.co'" else "'laeredev.co:3000'")
+  res.render("./public/index.html")
+
+exports.context = (req, res) ->
+  res.header("Content-Type", "application/javascript").send("""
+    window.laere = window.laere || {};
+    window.laere.user = #{JSON.stringify(req.user)};
+    window.laere.school = #{JSON.stringify(req.currentSchool)};
+    window.laere.env = "#{JSON.stringify(process.env.NODE_ENV) or 'development'}";
+    window.laere.host = "#{(if process.env.NODE_ENV is 'production' then 'laere.co' else 'laeredev.co:3000')}";
+  """)

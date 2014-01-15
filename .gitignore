@@ -2,8 +2,6 @@
 .nodemonignore
 .sass-cache/
 node_modules/
-public/lib
-public/livereload
-public/compiled
+public/
 .idea/
 npm-debug.log
