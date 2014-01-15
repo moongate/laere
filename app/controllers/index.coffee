@@ -12,6 +12,6 @@ exports.context = (req, res) ->
     window.laere = window.laere || {};
     window.laere.user = #{JSON.stringify(req.user)};
     window.laere.school = #{JSON.stringify(req.currentSchool)};
-    window.laere.env = "#{JSON.stringify(process.env.NODE_ENV) or 'development'}";
+    window.laere.env = "#{process.env.NODE_ENV or 'development'}";
     window.laere.host = "#{(if process.env.NODE_ENV is 'production' then 'laere.co' else 'laeredev.co:3000')}";
   """)
