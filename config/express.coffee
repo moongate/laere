@@ -24,7 +24,7 @@ module.exports = (app, passport, config) ->
     next()
 
   cacheHandler = (req, res, next) ->
-    if /\.js|\.css|\.woff/.test(req.url)
+    if /\.js|\.css|\.woff/.test(req.url) and not req.url is '/context.js'
       res.header "Cache-Control", "public"
       res.header "Expires", new Date(Date.now() + 31536000000).toUTCString()
     next()
