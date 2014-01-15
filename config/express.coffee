@@ -19,6 +19,10 @@ module.exports = (app, passport, config) ->
       (/json|text|javascript|css/).test res.getHeader("Content-Type")
     level: 9
 
+  versionHeaderHandler = (req, res, next) ->
+    res.setHeader('X-Laere-Version', config.version)
+    next()
+
   cacheHandler = (req, res, next) ->
     if /\.js|\.css|\.woff/.test(req.url)
       res.header "Cache-Control", "public"
@@ -63,6 +67,7 @@ module.exports = (app, passport, config) ->
   app.set "views", "app/views" # Set views path
   app.engine "dust", dustjs.dust(layout: "layout")
   app.set "view engine", "dust" # Set template engine
+  app.use versionHeaderHandler # Send Laere version on every request
   app.use wwwRedirectHandler # Redirect www to no-www
   app.use cacheHandler # Enable cache for 1 year
   app.use express.compress compressOptions # Should be before express.static

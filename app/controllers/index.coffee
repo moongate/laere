@@ -5,7 +5,7 @@ mongoose = require("mongoose")
 async = require("async")
 _ = require("underscore")
 exports.render = (req, res) ->
-  res.send "TODO send index.html from public folder"
+  res.render("./public/index.html")
 
 exports.context = (req, res) ->
   res.header("Content-Type", "application/javascript").send("""
