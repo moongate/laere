@@ -1,7 +1,7 @@
 {
   "name": "laere",
   "description": "The online classroom engine",
-  "version": "0.4.3",
+  "version": "0.5.0-beta",
   "private": false,
   "author": "Guilherme Rodrigues",
   "repository": {
