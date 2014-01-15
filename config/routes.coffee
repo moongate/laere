@@ -62,3 +62,4 @@ module.exports = (app, passport) ->
 
   # Home route
   app.get "/", index.render
+  app.get "/context.js", index.context

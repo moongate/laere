@@ -13,7 +13,7 @@
     "npm": "1.2.x"
   },
   "scripts": {
-    "start": "grunt",
+    "start": "pm2 start server.coffee",
     "test": "mocha --compilers coffee:coffee-script --reporter spec test/**"
   },
   "dependencies": {
@@ -33,23 +33,20 @@
     "async": "latest",
     "view-helpers": "latest",
     "glob": "latest",
-    "mean-logger": "latest"
+    "mean-logger": "latest",
+    "adaro": "~0.1.5",
+    "dustjs-linkedin": "~2.2.0",
+    "dustjs-helpers": "~1.1.1"
   },
   "devDependencies": {
     "supertest": "latest",
     "should": "latest",
     "grunt": "latest",
-    "grunt-contrib-coffee": "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-contrib-less": "latest",
-    "grunt-contrib-clean": "latest",
     "grunt-mocha-test": "latest",
-    "grunt-concurrent": "latest",
-    "grunt-nodemon": "latest",
-    "grunt-release": "~0.6.0"
+    "grunt-nodemon": "latest"
   },
   "peerDependencies": {
-    "grunt-cli": "*",
-    "bower": "*"
+    "grunt-cli": "*"
   }
 }
