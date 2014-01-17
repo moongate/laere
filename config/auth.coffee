@@ -6,6 +6,7 @@ GitHubStrategy = require("passport-github").Strategy
 GoogleStrategy = require("passport-google-oauth").Strategy
 User = mongoose.model("User")
 users = require("../app/user/user-controller")
+index = require("../app/controllers/index")
 
 module.exports = (app, passport, config) ->
   passport.auth =
@@ -70,48 +71,18 @@ module.exports = (app, passport, config) ->
   ###
 
   #Use local strategy
+  localStrategy = (email, password, done) ->
+    User.findOne {email: email}, (err, user) ->
+      return done(err) if err
+      return done(null, false, {message: "auth.noSuchUser"}) unless user
+      return done(null, false, {message: "auth.invalidCredentials"}) unless user.authenticate(password)
+      return done(null, user)
+
   passport.use new LocalStrategy(
     usernameField: "email"
     passwordField: "password"
-  , (email, password, done) ->
-    User.findOne
-      email: email
-    , (err, user) ->
-      return done(err) if err
-      unless user
-        return done(null, false,
-          message: "Unknown user"
-        )
-      unless user.authenticate(password)
-        return done(null, false,
-          message: "Invalid password"
-        )
-      done null, user
-  )
-
-  #Use twitter strategy
-  passport.use new TwitterStrategy(
-    consumerKey: config.twitter.clientID
-    consumerSecret: config.twitter.clientSecret
-    callbackURL: config.twitter.callbackURL
-  , (token, tokenSecret, profile, done) ->
-    User.findOne
-      "twitter.id_str": profile.id
-    , (err, user) ->
-      return done(err)  if err
-      unless user
-        user = new User(
-          name: profile.displayName
-          username: profile.username
-          provider: "twitter"
-          twitter: profile._json
-        )
-        user.save (err) ->
-          console.log err  if err
-          done err, user
-
-      else
-        done err, user
+  ,
+    localStrategy
   )
 
   #Use facebook strategy
@@ -140,56 +111,6 @@ module.exports = (app, passport, config) ->
         done err, user
   )
 
-  #Use github strategy
-  passport.use new GitHubStrategy(
-    clientID: config.github.clientID
-    clientSecret: config.github.clientSecret
-    callbackURL: config.github.callbackURL
-  , (accessToken, refreshToken, profile, done) ->
-    User.findOne
-      "github.id": profile.id
-    , (err, user) ->
-      unless user
-        user = new User(
-          name: profile.displayName
-          email: profile.emails[0].value
-          username: profile.username
-          provider: "github"
-          github: profile._json
-        )
-        user.save (err) ->
-          console.log err  if err
-          done err, user
-
-      else
-        done err, user
-  )
-
-  #Use google strategy
-  passport.use new GoogleStrategy(
-    consumerKey: config.google.clientID
-    consumerSecret: config.google.clientSecret
-    callbackURL: config.google.callbackURL
-  , (accessToken, refreshToken, profile, done) ->
-    User.findOne
-      "google.id": profile.id
-    , (err, user) ->
-      unless user
-        user = new User(
-          name: profile.displayName
-          email: profile.emails[0].value
-          username: profile.username
-          provider: "google"
-          google: profile._json
-        )
-        user.save (err) ->
-          console.log err  if err
-          done err, user
-
-      else
-        done err, user
-  )
-
   ###
   Authentication Routes
   ###
@@ -198,34 +119,8 @@ module.exports = (app, passport, config) ->
     #Setting the facebook oauth routes
     app.get "/auth/facebook", passport.authenticate("facebook",
       scope: ["email", "user_about_me"]
-      failureRedirect: "/signin"
-    ), users.signin
+      failureRedirect: "/#/login"
+    ), index.render
     app.get "/auth/facebook/callback", passport.authenticate("facebook",
-      failureRedirect: "/signin"
+      failureRedirect: "/#/login"
     ), users.authCallback
-
-    #Setting the github oauth routes
-    app.get "/auth/github", passport.authenticate("github",
-      failureRedirect: "/signin"
-    ), users.signin
-    app.get "/auth/github/callback", passport.authenticate("github",
-      failureRedirect: "/signin"
-    ), users.authCallback
-
-    #Setting the twitter oauth routes
-    app.get "/auth/twitter", passport.authenticate("twitter",
-      failureRedirect: "/signin"
-    ), users.signin
-    app.get "/auth/twitter/callback", passport.authenticate("twitter",
-      failureRedirect: "/signin"
-    ), users.authCallback
-
-    #Setting the google oauth routes
-    app.get "/auth/google", passport.authenticate("google",
-      failureRedirect: "/signin"
-      scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"]
-    ), users.signin
-    app.get "/auth/google/callback", passport.authenticate("google",
-      failureRedirect: "/signin"
-    ), users.authCallback
-

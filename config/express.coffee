@@ -49,6 +49,11 @@ module.exports = (app, passport, config) ->
   errorHandler = (err, req, res, next) ->
     #Log it
     console.error err.stack
+
+    if req.returnUrl
+      req.flash 'error', req.friendlyError ? JSON.stringify(err.message ? err.name)
+      return res.redirect req.returnUrl
+
     #Error page
     res.status(500).render "error",
       error: err.stack

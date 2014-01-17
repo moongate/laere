@@ -12,53 +12,29 @@ exports.authCallback = (req, res, next) ->
   res.redirect "/"
 
 ###
-Show login form
-###
-exports.signin = (req, res) ->
-  res.render "users/signin",
-    title: "Signin"
-    message: req.flash("error")
-    env: (if process.env.NODE_ENV then JSON.stringify(process.env.NODE_ENV) else "'development'")
-
-###
-Show sign up form
-###
-exports.signup = (req, res) ->
-  res.render "users/signup",
-    title: "Sign up"
-    user: new User()
-    env: (if process.env.NODE_ENV then JSON.stringify(process.env.NODE_ENV) else "'development'")
-
-###
 Logout
 ###
 exports.signout = (req, res) ->
   req.logout()
   res.redirect "/"
 
-###
-Session
-###
-exports.session = (req, res) ->
-  res.redirect "/"
 
 ###
 Create user via signup page
 ###
-exports.createSignUp = (req, res) ->
+exports.createSignUp = (req, res, next) ->
   user = new User(req.body)
   user.provider = "local"
   user.save (err) ->
+    req.returnUrl = "/#/signup"
     if err
-      console.log err
-      return res.render("users/signup",
-        errors: err.errors
-        user: user
-      )
+      req.friendlyError = "auth.existingUser" if err.message.indexOf('duplicate key') isnt -1
+      return next(err)
+
     req.logIn user, (err) ->
-      console.log err
-      return next(err)  if err
-      res.redirect "/"
+      return next(err) if err
+      req.flash('success', 'welcome')
+      res.redirect '/'
 
 ###
 Create user via API

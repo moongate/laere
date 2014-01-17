@@ -12,7 +12,9 @@ User Schema
 ###
 UserSchema = new Schema(
   name: String
-  email: String
+  email:
+    type: String
+    unique: true
   # Name property of the school this user belongs to
   school: String
   permissions:
