@@ -18,7 +18,7 @@ describe "Users", ->
       username: "user"
       password: "password"
     )
-    done()
+    User.remove {}, -> done()
 
   describe "Method Save", ->
     it "should save", (done) ->
