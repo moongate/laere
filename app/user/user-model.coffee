@@ -13,7 +13,6 @@ User Schema
 UserSchema = new Schema(
   name: String
   email: String
-  username: String
   # Name property of the school this user belongs to
   school: String
   permissions:
@@ -51,28 +50,20 @@ Validations
 validatePresenceOf = (value) ->
   value and value.length
 
-
 # the below 4 validations only apply if you are signing up traditionally
 UserSchema.path("name").validate ((name) ->
-
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
   name.length
 ), "Name cannot be blank"
-UserSchema.path("email").validate ((email) ->
 
+UserSchema.path("email").validate ((email) ->
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
   email.length
 ), "Email cannot be blank"
-UserSchema.path("username").validate ((username) ->
 
-  # if you are authenticating by any of the oauth strategies, don't validate
-  return true  if authTypes.indexOf(@provider) isnt -1
-  username.length
-), "Username cannot be blank"
 UserSchema.path("hashed_password").validate ((hashed_password) ->
-
   # if you are authenticating by any of the oauth strategies, don't validate
   return true  if authTypes.indexOf(@provider) isnt -1
   hashed_password.length

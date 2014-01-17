@@ -71,11 +71,11 @@ module.exports = (app, passport, config) ->
 
   #Use local strategy
   passport.use new LocalStrategy(
-    usernameField: "username"
+    usernameField: "email"
     passwordField: "password"
-  , (username, password, done) ->
+  , (email, password, done) ->
     User.findOne
-      username: username
+      email: email
     , (err, user) ->
       return done(err) if err
       unless user
