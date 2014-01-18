@@ -17,6 +17,7 @@ UserSchema = new Schema(
     unique: true
   # Name property of the school this user belongs to
   school: String
+  admin: Boolean
   permissions:
     type:
       study: Boolean

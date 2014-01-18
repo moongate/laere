@@ -71,16 +71,18 @@ module.exports = (app, passport, config) ->
   ###
 
   #Use local strategy
-  localStrategy = (email, password, done) ->
+  localStrategy = (req, email, password, done) ->
     User.findOne {email: email}, (err, user) ->
       return done(err) if err
       return done(null, false, {message: "auth.noSuchUser"}) unless user
+      return done(null, false, {message: "auth.noSuchUserOnSchool"}) unless user.school is req.currentSchool?.name
       return done(null, false, {message: "auth.invalidCredentials"}) unless user.authenticate(password)
       return done(null, user)
 
   passport.use new LocalStrategy(
     usernameField: "email"
     passwordField: "password"
+    passReqToCallback: true
   ,
     localStrategy
   )

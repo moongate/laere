@@ -24,6 +24,8 @@ Create user via signup page
 ###
 exports.createSignUp = (req, res, next) ->
   user = new User(req.body)
+  # Add the current school to this user.
+  user.school = req.currentSchool?.name
   user.provider = "local"
   user.save (err) ->
     req.returnUrl = "/#/signup"
@@ -41,6 +43,8 @@ Create user via API
 ###
 exports.create = (req, res) ->
   user = new User(req.body)
+  # Add the current school to this user.
+  user.school = req.currentSchool?.name
   user.provider = "local"
   user.save (err) ->
     if err
