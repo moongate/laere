@@ -9,6 +9,7 @@ mongoose = require 'mongoose'
 _ = require 'underscore'
 glob = require 'glob'
 pkg = require './package.json'
+http = require 'q-io/http'
 
 ###
 Main application entry file.
@@ -37,7 +38,9 @@ require('./config/express') app, passport, config # Express settings
 require('./config/routes') app, passport # Bootstrap routes
 
 # Start the app
-app.listen config.port
-console.log "App started on port #{config.port} with environment #{config.env}"
+app.listen config.port, ->
+  console.log "App started on port #{config.port} with environment #{config.env}"
+  # Reload app on restart
+  http.request('http://localhost:35729/changed?files=any') if config.env is 'development'
 
 exports = module.exports = app
