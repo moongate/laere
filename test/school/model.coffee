@@ -2,7 +2,7 @@
 Module dependencies.
 ###
 should = require("should")
-app = require("../../server")
+app = require("../../app")
 mongoose = require("mongoose")
 User = mongoose.model("User")
 School = mongoose.model("School")

@@ -4,7 +4,6 @@ Module dependencies.
 express = require 'express'
 fs = require 'fs'
 passport = require 'passport'
-logger = require 'mean-logger'
 path = require 'path'
 mongoose = require 'mongoose'
 _ = require 'underscore'
@@ -28,6 +27,8 @@ defaultConfig =
 config = _.extend(defaultConfig, require("./config/env/#{defaultConfig.env}.json") or {})
 app = express() # Create your express app
 db = mongoose.connect(config.db) # Bootstrap db connection
+mongoose.connection.on 'error', ->
+  console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
 
 # Bootstrap models
 require(file) for file in glob.sync './app/**/*-model.coffee'
@@ -38,8 +39,5 @@ require('./config/routes') app, passport # Bootstrap routes
 # Start the app
 app.listen config.port
 console.log "App started on port #{config.port} with environment #{config.env}"
-
-# Initializing logger
-logger.init app, passport, mongoose
 
 exports = module.exports = app

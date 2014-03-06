@@ -2,7 +2,6 @@
 Module dependencies.
 ###
 mongoose = require("mongoose")
-async = require("async")
 Classroom = mongoose.model("Classroom")
 _ = require("underscore")
 

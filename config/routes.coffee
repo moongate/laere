@@ -1,4 +1,3 @@
-async = require("async")
 module.exports = (app, passport) ->
 
   users = require("../app/user/user-controller")
