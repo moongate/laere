@@ -17,15 +17,14 @@ Please note that the order of loading is important.
 ###
 
 # Default configurations, extended by options provided in config/env files
-defaultConfig =
+config =
   root: path.normalize '.'
-  port: 80
-  db: process.env.MONGOHQ_URL
+  port: process.env.PORT or 80
+  db: process.env.MONGOLAB_URI or 'mongodb://localhost/laere-dev'
   secret: process.env.SECRET or 'CLEAN'
   env: process.env.NODE_ENV or 'development'
   version: pkg.version
 
-config = _.extend(defaultConfig, require("./config/env/#{defaultConfig.env}.json") or {})
 app = express() # Create your express app
 db = mongoose.connect(config.db) # Bootstrap db connection
 mongoose.connection.on 'error', ->
