@@ -10,5 +10,3 @@ before_install:
 branches:
   only:
     - master
-after_success:
-  "curl --data 'laere' http://laere.co:9001"
