@@ -75,7 +75,7 @@ School verification interceptor
 ###
 exports.verify = (req, res, next) ->
   school = /(.*).laere(dev)?.co/.exec(req.headers.host)?[1]
-  return next() unless school?
+  return next() if school is undefined or school is 'www'
   console.log 'searching for', school
   School.findOne {name: school}, (err, school) ->
     if err

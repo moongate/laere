@@ -30,12 +30,6 @@ module.exports = (app, passport, config) ->
       res.header "Expires", new Date(Date.now() + 31536000000).toUTCString()
     next()
 
-  wwwRedirectHandler = (req, res, next) ->
-    if req.headers.host.match(/^www\..*/i)
-      res.redirect(301, req.protocol + '://' + req.headers.host.replace('www\.', ''))
-    else
-      next()
-
   booleanQueryParser = (req, res, next) ->
     req.query[key] = (value is 'true') for key, value of req.query when value in ['true', 'false']
     next()
@@ -74,7 +68,6 @@ module.exports = (app, passport, config) ->
   app.engine "dust", dustjs.dust(layout: "layout")
   app.set "view engine", "dust" # Set template engine
   app.use versionHeaderHandler # Send Laere version on every request
-  app.use wwwRedirectHandler # Redirect www to no-www
   app.use cacheHandler # Enable cache for 1 year
   app.use express.compress compressOptions # Should be before express.static
   app.use express.favicon() # Setting the fav icon
