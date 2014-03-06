@@ -4,6 +4,7 @@ flash = require("connect-flash")
 dustjs = require("adaro")
 _ = require("underscore")
 schools = require("../app/school/school-controller")
+harp = require("harp")
 
 module.exports = (app, passport, config) ->
   # express/mongo session storage
@@ -76,8 +77,9 @@ module.exports = (app, passport, config) ->
   app.use wwwRedirectHandler # Redirect www to no-www
   app.use cacheHandler # Enable cache for 1 year
   app.use express.compress compressOptions # Should be before express.static
-  app.use express.favicon() # Setting the fav icon and static folder
+  app.use express.favicon() # Setting the fav icon
   app.use express.static(config.root + "/public")
+  app.use harp.mount(config.root + "/node_modules/laere-ui") # Add angular front end application
   app.use express.logger("dev") if process.env.NODE_ENV isnt "test"
   app.use booleanQueryParser # Parse Booleans in req.query
   app.use schools.verify
