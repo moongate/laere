@@ -16,7 +16,7 @@
     "start": "pm2 start server.coffee",
     "restart": "pm2 reload server.coffee",
     "stop": "pm2 stop server.coffee",
-    "test": "mocha --compilers coffee:coffee-script --reporter spec test/**"
+    "test": "mocha --compilers coffee:coffee-script/register --reporter spec test/**"
   },
   "dependencies": {
     "express": "latest",
