@@ -40,7 +40,6 @@
     "gulp": "~3.5.2",
     "gulp-mocha": "~0.4.1",
     "gulp-nodemon": "~1.0.0",
-    "gulp-livereload": "^1.2.0",
     "gulp-watch": "^0.5.0"
   },
   "peerDependencies": {
