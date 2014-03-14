@@ -72,7 +72,7 @@ module.exports = (app, passport, config) ->
   app.use express.compress compressOptions # Should be before express.static
   app.use express.favicon() # Setting the fav icon
   app.use express.static(config.root + "/public")
-  app.use harp.mount(config.root + "/node_modules/laere-ui") # Add angular front end application
+  app.use harp.mount(config.root + "/node_modules/laere-ui/src") # Add angular front end application
   app.use express.logger("dev") if process.env.NODE_ENV isnt "test"
   app.use booleanQueryParser # Parse Booleans in req.query
   app.use schools.verify
