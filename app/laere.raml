@@ -1,0 +1,60 @@
+#%RAML 0.8
+title: Laere
+/users:
+  get:
+  post:
+  /{user}:
+    get:
+    put:
+    delete:
+    /classrooms:
+      get:
+        description: List classrooms this user studies in
+      post:
+        description: Join classroom. Requires classroom id.
+      /{classroom}/interactions:
+        get:
+        post:
+        /{interaction}:
+          get:
+          put:
+          delete:
+/courses:
+  get:
+  post:
+  /{course}:
+    get:
+    put:
+    delete:
+    /contents:
+      get:
+        description: List all contents of this course
+      post:
+        description: Add content to this course
+    /classrooms:
+      get:
+      post:
+      /{classroom}:
+        get:
+        put:
+        delete:
+        /users:
+          get:
+            description: List students in this classroom
+        /contents:
+          get:
+            description: List ordered contents in this classroom
+/contents:
+  get:
+  post:
+  /{content}:
+    get:
+    put:
+    delete:
+/subjects:
+  get:
+  post:
+  /{subject}:
+    get:
+    put:
+    delete:
