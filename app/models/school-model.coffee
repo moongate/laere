@@ -4,9 +4,6 @@ Module dependencies.
 mongoose = require("mongoose")
 Schema = mongoose.Schema
 
-###
-School Schema
-###
 SchoolSchema = new Schema(
   created:
     type: Date
@@ -14,33 +11,20 @@ SchoolSchema = new Schema(
 
   name:
     type: String
-    'default': ""
     trim: true
+    required: true
 
-  label:
+  code:
     type: String
-    'default': ""
     trim: true
+    required: true
 
   creator:
     type: Schema.ObjectId
     ref: "User"
+    required: true
 )
 
-###
-Validations
-###
-SchoolSchema.path("name").validate ((name) ->
-  name.length
-), "Name cannot be blank"
-
-SchoolSchema.path("label").validate ((label) ->
-  label.length
-), "Label cannot be blank"
-
-###
-Statics
-###
 SchoolSchema.statics = load: (id, cb) ->
   @findOne(_id: id).populate("creator").exec cb
 

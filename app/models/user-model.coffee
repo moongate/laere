@@ -5,35 +5,47 @@ mongoose = require("mongoose")
 Schema = mongoose.Schema
 crypto = require("crypto")
 _ = require("underscore")
-authTypes = ["github", "twitter", "facebook", "google"]
+authTypes = ["facebook"]
+Permission = require '../enums/permission.coffee'
 
-###
-User Schema
-###
+SchoolPermission = new Schema(
+  school:
+    type: Schema.ObjectId
+    ref: 'School'
+
+  permissions: [
+    type: String
+    enum: _.values Permission
+  ]
+)
+
 UserSchema = new Schema(
-  name: String
+  name:
+    type: String
+    required: true
+
   email:
     type: String
     unique: true
-  # Name property of the school this user belongs to
-  school: String
+    required: true
+
+  schools: [
+    type: Schema.ObjectId
+    ref: 'School'
+    required: true
+  ]
+
   admin: Boolean
-  permissions:
-    type:
-      study: Boolean
-      teach: Boolean
-      manage: Boolean
-      classroom: Boolean
-      course: Boolean
-    'default':
-      study: true
+
+  permissions: [ SchoolPermission ]
+
   provider: String
+
   hashed_password: String
+
   salt: String
+
   facebook: {}
-  twitter: {}
-  github: {}
-  google: {}
 )
 
 ###

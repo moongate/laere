@@ -1,12 +1,9 @@
 ###
 Module dependencies.
 ###
-mongoose = require("mongoose")
+mongoose = require 'mongoose'
 Schema = mongoose.Schema
 
-###
-Subject Schema
-###
 SubjectSchema = new Schema(
   created:
     type: Date
@@ -14,34 +11,15 @@ SubjectSchema = new Schema(
 
   name:
     type: String
-    'default': ""
     trim: true
+    required: true
 
-  label:
-    type: String
-    'default': ""
-    trim: true
-
-  creator:
+  parent:
     type: Schema.ObjectId
-    ref: "User"
+    ref: 'Subject'
 )
 
-###
-Validations
-###
-SubjectSchema.path("name").validate ((name) ->
-  name.length
-), "Name cannot be blank"
-
-SubjectSchema.path("label").validate ((label) ->
-  label.length
-), "Label cannot be blank"
-
-###
-Statics
-###
 SubjectSchema.statics = load: (id, cb) ->
-  @findOne(_id: id).populate("creator").exec cb
+  @findOne(_id: id).exec cb
 
-mongoose.model "Subject", SubjectSchema
+mongoose.model 'Subject', SubjectSchema

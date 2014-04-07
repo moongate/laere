@@ -3,10 +3,9 @@ Module dependencies.
 ###
 mongoose = require("mongoose")
 Schema = mongoose.Schema
+ContentLevel = require '../enums/content-level.coffee'
+ContentType = require '../enums/content-type.coffee'
 
-###
-Content Schema
-###
 ContentSchema = new Schema(
   created:
     type: Date
@@ -16,8 +15,9 @@ ContentSchema = new Schema(
     type: String
     'default': ""
     trim: true
+    required: true
 
-  label:
+  description:
     type: String
     'default': ""
     trim: true
@@ -25,22 +25,33 @@ ContentSchema = new Schema(
   creator:
     type: Schema.ObjectId
     ref: "User"
+    required: true
+
+  url:
+    type: String
+
+  level:
+    type: String
+    enum: _.values ContentLevel
+
+  type:
+    type: String
+    enum: _.values ContentType
+
+  upvotes:
+    type: Number
+    min: 0
+
+  downvotes:
+    type: Number
+    min: 0
+
+  subjects: [
+    type: Schema.ObjectId
+    ref: "Subject"
+  ]
 )
 
-###
-Validations
-###
-ContentSchema.path("name").validate ((name) ->
-  name.length
-), "Name cannot be blank"
-
-ContentSchema.path("label").validate ((label) ->
-  label.length
-), "Label cannot be blank"
-
-###
-Statics
-###
 ContentSchema.statics = load: (id, cb) ->
   @findOne(_id: id).populate("creator").exec cb
 
