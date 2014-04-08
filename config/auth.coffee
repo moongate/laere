@@ -2,7 +2,7 @@ mongoose = require("mongoose")
 LocalStrategy = require("passport-local").Strategy
 FacebookStrategy = require("passport-facebook").Strategy
 User = mongoose.model("User")
-users = require("../app/user/user-controller")
+users = require("../app/controllers/user/user-controller")
 index = require("../app/controllers/index")
 
 module.exports = (app, passport, config) ->

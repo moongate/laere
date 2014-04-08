@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "coffee app.coffee",
-    "test": "mocha --compilers coffee:coffee-script/register --reporter spec test/**"
+    "test": "mocha --compilers coffee:coffee-script/register --reporter spec specs/**"
   },
   "dependencies": {
     "express": "latest",

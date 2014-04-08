@@ -3,6 +3,7 @@ Module dependencies.
 ###
 mongoose = require("mongoose")
 Schema = mongoose.Schema
+_ = require 'underscore'
 ContentLevel = require '../enums/content-level.coffee'
 ContentType = require '../enums/content-type.coffee'
 

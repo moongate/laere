@@ -3,7 +3,7 @@ mongoStore = require("connect-mongo")(express)
 flash = require("connect-flash")
 dustjs = require("adaro")
 _ = require("underscore")
-schools = require("../app/school/school-controller")
+schools = require("../app/controllers/school/school-controller")
 harp = require("harp")
 
 module.exports = (app, passport, config) ->
