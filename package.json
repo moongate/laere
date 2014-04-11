@@ -17,7 +17,7 @@
     "test": "mocha --compilers coffee:coffee-script/register --reporter spec specs/**"
   },
   "dependencies": {
-    "express": "latest",
+    "express": "^3.5.1",
     "mongoose": "latest",
     "connect-mongo": "latest",
     "connect-flash": "latest",
@@ -33,7 +33,8 @@
     "harp": "^0.11.2",
     "laere-ui": "git://github.com/moongate/laere-ui#v0.2.0",
     "coffee-script": "^1.7.1",
-    "q-io": "^1.11.0"
+    "q-io": "^1.11.0",
+    "baucis": "^0.16.21"
   },
   "devDependencies": {
     "should": "latest",

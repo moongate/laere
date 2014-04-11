@@ -31,10 +31,11 @@ mongoose.connection.on 'error', ->
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.')
 
 # Bootstrap models
-require(file) for file in glob.sync './app/**/*-model.coffee'
+require(file) for file in glob.sync './app/models/*.coffee'
+require(file)(app) for file in glob.sync './app/controllers/*.coffee' # Register routes
 require('./config/auth') app, passport, config # Bootstrap passport config and auth rules
+require('./config/rest') app, passport # Bootstrap REST API
 require('./config/express') app, passport, config # Express settings
-require('./config/routes') app, passport # Bootstrap routes
 
 # Start the app
 app.listen config.port, ->

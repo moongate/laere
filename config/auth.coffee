@@ -1,57 +1,23 @@
 mongoose = require("mongoose")
 LocalStrategy = require("passport-local").Strategy
-FacebookStrategy = require("passport-facebook").Strategy
 User = mongoose.model("User")
-users = require("../app/controllers/user/user-controller")
-index = require("../app/controllers/index")
 
-module.exports = (app, passport, config) ->
-  passport.auth =
-    #	Generic require login routing middleware
-    requiresLogin: (req, res, next) ->
-      unless req.isAuthenticated()
-        return res.send(401, "User is not authorized")
-      next()
+module.exports = (app, passport) ->
 
-    #	User authorizations routing middleware
-    user:
-      hasAuthorization: (req, res, next) ->
-        unless (req.profile.id is req.user.id) or
-        (req.user.permissions.manage)
-          return res.send(401, "User is not authorized")
-        next()
+  app.get "/signout", (req, res) ->
+    req.logout()
+    res.redirect "/"
 
-    #	Course authorizations routing middleware
-    course:
-      hasAuthorization: (req, res, next) ->
-        unless req.course.creator.id is req.user.id or
-        (req.user.permissions.course)
-          return res.send(401, "User is not authorized")
-        next()
+  app.post "/login", (req, res, next) ->
+    authCallback = (err, user) ->
+      req.returnUrl = "/#/login"
+      return next(err) if err
+      req.logIn user, (err) ->
+        return next(err) if err
+        req.flash('success', 'welcome')
+        res.redirect '/'
 
-    #	Classroom authorizations routing middleware
-    classroom:
-      hasAuthorization: (req, res, next) ->
-        unless req.classroom.creator.id is req.user.id or
-        (req.user.permissions.classroom)
-          return res.send(401, "User is not authorized")
-        next()
-
-    #	Progress authorizations routing middleware
-    progress:
-      hasAuthorization: (req, res, next) ->
-        unless req.progress.student.id is req.user.id or
-        (req.user.permissions.manage)
-          return res.send(401, "User is not authorized")
-        next()
-
-    #	School authorizations routing middleware
-    school:
-      hasAuthorization: (req, res, next) ->
-        unless req.school.creator.id is req.user.id or
-        (req.user.permissions.manage)
-          return res.send(401, "User is not authorized")
-        next()
+    passport.authenticate("local", authCallback)(req, res, next)
 
   #Serialize sessions
   passport.serializeUser (user, done) ->
@@ -67,35 +33,21 @@ module.exports = (app, passport, config) ->
   Passport Strategies initialization
   ###
 
-  #Use local strategy
-  localStrategy = (req, email, password, done) ->
-    User.findOne {email: email}, (err, user) ->
-      return done(err) if err
-      return done(null, false, {message: "auth.noSuchUser"}) unless user
-      return done(null, false, {message: "auth.noSuchUserOnSchool"}) unless user.school is req.currentSchool?.name
-      return done(null, false, {message: "auth.invalidCredentials"}) unless user.authenticate(password)
-      return done(null, user)
-
-  passport.use new LocalStrategy(
+  passport.use new LocalStrategy
     usernameField: "email"
     passwordField: "password"
     passReqToCallback: true
-  ,
-    localStrategy
-  )
-
-  # TODO Use facebook strategy
-
-  ###
-  Authentication Routes
-  ###
-
-  passport.setupRoutes = ->
-    #Setting the facebook oauth routes
-    app.get "/auth/facebook", passport.authenticate("facebook",
-      scope: ["email", "user_about_me"]
-      failureRedirect: "/#/login"
-    ), index.render
-    app.get "/auth/facebook/callback", passport.authenticate("facebook",
-      failureRedirect: "/#/login"
-    ), users.authCallback
+    (req, email, password, done) ->
+      User.findOne {email: email}, (err, user) ->
+        return done(err) if err
+        if not user
+          req.friendlyError = "auth.noSuchUser"
+          done(new Error("Authentication Error"))
+        else if not (user.school is req.currentSchool?.name)
+          req.friendlyError = "auth.noSuchUserOnSchool"
+          done(new Error("Authentication Error"))
+        else if not user.authenticate(password)
+          req.friendlyError = "auth.invalidCredentials"
+          done(new Error("Authentication Error"))
+        else
+          done(null, user)
