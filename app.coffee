@@ -19,7 +19,7 @@ Please note that the order of loading is important.
 # Default configurations, extended by options provided in config/env files
 config =
   root: path.normalize '.'
-  port: process.env.PORT or 80
+  port: process.env.PORT or 5000
   db: process.env.MONGOLAB_URI or 'mongodb://localhost/laere-dev'
   secret: process.env.SECRET or 'CLEAN'
   env: process.env.NODE_ENV or 'development'
