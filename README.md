@@ -51,3 +51,13 @@ $ sudo vim /etc/hosts
 ```
 
 Visit `http://laere.laeredev.co:5000` and you should be good to go.
+
+## Screenshots
+
+![](http://i.imgur.com/QXTqgUb.png)
+
+![](http://i.imgur.com/ePTn4yz.png)
+
+![](http://i.imgur.com/7y4M8M8.png)
+
+![](http://i.imgur.com/6kJ6YrO.png)
