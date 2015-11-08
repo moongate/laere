@@ -39,3 +39,15 @@ Use `mongorestore` to restore the dump present in `dump/`.
 
 There are two initial `user:pass` combinations:
 `test@laere.co:test` and `test2@laere.co:test2`.
+
+Finally, add `laeredev.co` and `laere.laeredev.co` to your `hosts` file:
+
+```
+$ sudo vim /etc/hosts
+
+(...)
+127.0.0.1       laere.laeredev.co
+127.0.0.1       laeredev.co
+```
+
+Visit `http://laere.laeredev.co:5000` and you should be good to go.
